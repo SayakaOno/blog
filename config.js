@@ -18,6 +18,10 @@ module.exports = {
 			path: '/'
 		},
 		{
+			label: { en: 'About', ja: 'について' },
+			path: '/pages/about'
+		},
+		{
 			label: { en: 'Search', ja: '検索' },
 			path: '/search'
 		},

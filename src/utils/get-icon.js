@@ -36,6 +36,9 @@ const getIcon = (name: string) => {
     case 'search':
       icon = ICONS.SEARCH;
       break;
+    case 'about':
+      icon = ICONS.PERSON;
+      break;
     case 'home':
       icon = ICONS.HOME;
       break;
