@@ -35,6 +35,7 @@ const pathname = Astro.url.pathname;
 <BaseLayout title={title} description={description} language={language}>
   <Sidebar
     client:load
+    transition:persist="sidebar"
     siteMetadata={siteMetadata}
     pathname={pathname}
     otherLanguagePath={otherLanguagePath}

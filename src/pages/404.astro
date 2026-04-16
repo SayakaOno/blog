@@ -13,6 +13,7 @@ const pathname = '/404';
 <BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
   <Sidebar
     client:load
+    transition:persist="sidebar"
     siteMetadata={siteMetadata}
     pathname={pathname}
     otherLanguagePath={null}

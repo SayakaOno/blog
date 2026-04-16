@@ -1,6 +1,7 @@
 ---
 import '../assets/scss/init.scss';
 import siteMetadata from '../data/siteMetadata.js';
+import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   title?: string;
@@ -30,6 +31,7 @@ const gaId = siteMetadata.googleAnalyticsId;
     <meta name="twitter:title" content={title} />
     <link rel="icon" href="/favicon.jpg" />
     <link rel="stylesheet" href="/css/prismjs/theme.min.css" />
+    <ClientRouter />
     <!-- Google Analytics (UA property — consider upgrading to GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
     <script define:vars={{ gaId }}>
