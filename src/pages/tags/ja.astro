@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getTagsList } from '../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+const language = 'ja';
+const tags = await getTagsList(language);
+const title = `タグ - ${siteMetadata.titleJa}`;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath="/tags"
+  />
+  <Page client:load title="タグ">
+    <ul>
+      {tags.map(tag => (
+        <li>
+          <a href={`/tag/${kebabCase(tag.fieldValue)}/ja`}>
+            {tag.fieldValue} ({tag.totalCount})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Page>
+</BaseLayout>

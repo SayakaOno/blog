@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Sidebar from '../../../components/Sidebar';
+import Feed from '../../../components/Feed';
+import Page from '../../../components/Page';
+import siteMetadata from '../../../data/siteMetadata.js';
+import { getCollection } from 'astro:content';
+import { makeEdge, getTagsList } from '../../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+export async function getStaticPaths() {
+  const tags = await getTagsList('ja');
+  const allPosts = await getCollection('posts', ({ data }) =>
+    !data.draft && data.language === 'ja'
+  );
+
+  return tags.map(({ fieldValue }) => {
+    const tagPosts = allPosts
+      .filter(p => (p.data.tags ?? []).includes(fieldValue))
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    return {
+      params: { tag: kebabCase(fieldValue) },
+      props: { tagName: fieldValue, edges: tagPosts.map(makeEdge) },
+    };
+  });
+}
+
+const { tagName, edges } = Astro.props;
+const language = 'ja';
+const title = `"${tagName}"タグのブログ - ${siteMetadata.titleJa}`;
+
+const enTags = await getTagsList('en');
+const enTagExists = enTags.some(t => t.fieldValue === tagName);
+const otherLanguagePath = enTagExists ? `/tag/${kebabCase(tagName)}/` : null;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title={tagName}>
+    <Feed edges={edges} language={language} />
+  </Page>
+</BaseLayout>

@@ -10,8 +10,13 @@ import remarkGfm from 'remark-gfm';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.sayaka-ono.com',
+  trailingSlash: 'ignore',
   integrations: [
-    react(),
+    react({
+      babel: {
+        plugins: ['@babel/plugin-transform-flow-strip-types'],
+      },
+    }),
     sitemap(),
   ],
   markdown: {

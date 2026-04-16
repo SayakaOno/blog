@@ -1,25 +1,11 @@
-// @flow
 import React from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'gatsby';
 import { PAGINATION } from '../../constants';
 import styles from './Pagination.module.scss';
 
-type Props = {
-  prevPagePath: string,
-  nextPagePath: string,
-  hasNextPage: boolean,
-  hasPrevPage: boolean
-};
-
 const cx = classNames.bind(styles);
 
-const Pagination = ({
-  prevPagePath,
-  nextPagePath,
-  hasNextPage,
-  hasPrevPage
-}: Props) => {
+const Pagination = ({ prevPagePath, nextPagePath, hasNextPage, hasPrevPage }) => {
   const prevClassName = cx({
     'pagination__prev-link': true,
     'pagination__prev-link--disable': !hasPrevPage
@@ -33,10 +19,14 @@ const Pagination = ({
   return (
     <div className={styles['pagination']}>
       <div className={styles['pagination__prev']}>
-        <Link rel="prev" to={hasPrevPage ? prevPagePath : '/'} className={prevClassName}>{PAGINATION.PREV_PAGE}</Link>
+        <a rel="prev" href={hasPrevPage ? prevPagePath : '/'} className={prevClassName}>
+          {PAGINATION.PREV_PAGE}
+        </a>
       </div>
       <div className={styles['pagination__next']}>
-        <Link rel="next" to={hasNextPage ? nextPagePath : '/'} className={nextClassName}>{PAGINATION.NEXT_PAGE}</Link>
+        <a rel="next" href={hasNextPage ? nextPagePath : '/'} className={nextClassName}>
+          {PAGINATION.NEXT_PAGE}
+        </a>
       </div>
     </div>
   );

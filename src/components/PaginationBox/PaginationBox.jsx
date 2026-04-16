@@ -1,20 +1,11 @@
-// @flow
 import React, { useEffect } from 'react';
 import moment from 'moment';
-import { Link } from 'gatsby';
 import { getIcon } from '../../utils';
 import Icon from '../Icon';
 import Search from './Search';
 import styles from './PaginationBox.module.scss';
 
-type Props = {
-  prevPagePath: string,
-  nextPagePath: string,
-  hasNextPage: boolean,
-  hasPrevPage: boolean
-};
-
-const PaginationBox = ({ currentPage, totalPage, language, dates }: Props) => {
+const PaginationBox = ({ currentPage, totalPage, language, dates }) => {
   const paginationBoxRef = React.createRef();
   const paginationListRef = React.createRef();
   const paginationUlRef = React.createRef();
@@ -179,7 +170,7 @@ const PaginationBox = ({ currentPage, totalPage, language, dates }: Props) => {
         <li
           key={i}
           ref={i === currentPage ? activePageRef : null}
-          onMouseOver={() => displayDate(i, event)}
+          onMouseOver={(event) => displayDate(i, event)}
           onMouseOut={removeDate}
           className={
             styles[
@@ -189,7 +180,7 @@ const PaginationBox = ({ currentPage, totalPage, language, dates }: Props) => {
             ]
           }
         >
-          <Link to={getLink(i)}>{i + 1}</Link>
+          <a href={getLink(i)}>{i + 1}</a>
         </li>
       );
     }

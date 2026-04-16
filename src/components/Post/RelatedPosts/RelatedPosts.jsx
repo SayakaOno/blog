@@ -1,10 +1,11 @@
-// @flow
 import React from 'react';
-import { Link } from 'gatsby';
-import { getTitle } from '../../../hooks';
 import styles from './RelatedPosts.module.scss';
 
-const RelatedPosts = ({ language, posts }: Props) => (
+/**
+ * posts: Array of { slug: string, title: string }
+ *   Titles are resolved server-side in the Astro page.
+ */
+const RelatedPosts = ({ language, posts }) => (
   <div className={styles['related-posts']}>
     <h3>
       {language === 'en'
@@ -12,13 +13,11 @@ const RelatedPosts = ({ language, posts }: Props) => (
         : '関連ブログ'}
     </h3>
     <ul>
-      {posts.map(post => {
-        return (
-          <li key={post}>
-            <Link to={post}>{getTitle(post)}</Link>
-          </li>
-        );
-      })}
+      {posts.map(post => (
+        <li key={post.slug}>
+          <a href={post.slug}>{post.title || post.slug}</a>
+        </li>
+      ))}
     </ul>
   </div>
 );

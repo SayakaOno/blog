@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Sidebar from '../../../components/Sidebar';
+import Feed from '../../../components/Feed';
+import Page from '../../../components/Page';
+import siteMetadata from '../../../data/siteMetadata.js';
+import { getCollection } from 'astro:content';
+import { makeEdge, getCategoriesList } from '../../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+export async function getStaticPaths() {
+  const categories = await getCategoriesList('ja');
+  const allPosts = await getCollection('posts', ({ data }) =>
+    !data.draft && data.language === 'ja'
+  );
+
+  return categories.map(({ fieldValue }) => {
+    const catPosts = allPosts
+      .filter(p => p.data.category === fieldValue)
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    return {
+      params: { cat: kebabCase(fieldValue) },
+      props: { catName: fieldValue, edges: catPosts.map(makeEdge) },
+    };
+  });
+}
+
+const { catName, edges } = Astro.props;
+const language = 'ja';
+const title = `${catName} - ${siteMetadata.titleJa}`;
+
+const enCategories = await getCategoriesList('en');
+const enCatExists = enCategories.some(c => c.fieldValue === catName);
+const otherLanguagePath = enCatExists ? `/category/${kebabCase(catName)}/` : null;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title={catName}>
+    <Feed edges={edges} language={language} />
+  </Page>
+</BaseLayout>

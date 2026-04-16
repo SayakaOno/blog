@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Feed from '../../components/Feed';
+import Page from '../../components/Page';
+import Pagination from '../../components/Pagination';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getCollection, type Language } from 'astro:content';
+import { makeEdge, entrySlug, getTagsList } from '../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+export async function getStaticPaths() {
+  const language: Language = 'en';
+  const tags = await import('../../utils/content').then(m => m.getTagsList(language));
+  const allPosts = await getCollection('posts', ({ data }) =>
+    !data.draft && data.language === language
+  );
+
+  return tags.map(({ fieldValue }) => {
+    const tagPosts = allPosts
+      .filter(p => (p.data.tags ?? []).includes(fieldValue))
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    return {
+      params: { tag: kebabCase(fieldValue) },
+      props: { tagName: fieldValue, edges: tagPosts.map(makeEdge) },
+    };
+  });
+}
+
+const { tagName, edges } = Astro.props;
+const language = 'en';
+const title = `All Posts tagged as "${tagName}" - ${siteMetadata.title}`;
+
+// Check if this tag exists in JA
+const jaTags = await getTagsList('ja');
+const jaTagExists = jaTags.some(t => t.fieldValue === tagName);
+const otherLanguagePath = jaTagExists ? `/tag/${kebabCase(tagName)}/ja` : null;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title={tagName}>
+    <Feed edges={edges} language={language} />
+  </Page>
+</BaseLayout>

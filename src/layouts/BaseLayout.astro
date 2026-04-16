@@ -1,0 +1,66 @@
+---
+import '../assets/scss/init.scss';
+import siteMetadata from '../data/siteMetadata.js';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  language?: 'en' | 'ja';
+}
+
+const {
+  title = siteMetadata.title,
+  description = siteMetadata.subtitle,
+  language = 'en',
+} = Astro.props;
+
+const lang = language === 'ja' ? 'ja' : 'en';
+const gaId = siteMetadata.googleAnalyticsId;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:site_name" content={title} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <link rel="icon" href="/favicon.jpg" />
+    <link rel="stylesheet" href="/css/prismjs/theme.min.css" />
+    <!-- Google Analytics (UA property — consider upgrading to GA4) -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </head>
+  <body>
+    <div class="layout">
+      <slot />
+    </div>
+    <!-- On first visit, redirect to /ja if browser language is Japanese -->
+    <script>
+      if (!sessionStorage.getItem('visited')) {
+        sessionStorage.setItem('visited', 'true');
+        const browserLang = navigator.language || (navigator as any).userLanguage;
+        if (browserLang === 'ja' && !location.pathname.startsWith('/ja')) {
+          location.href = '/ja';
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<style lang="scss">
+  @import '../assets/scss/variables';
+  @import '../assets/scss/mixins';
+
+  .layout {
+    lost-center: $layout-width;
+  }
+</style>

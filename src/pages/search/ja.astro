@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
+import Search from '../../components/Search';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getPostsForSearch, getCategoriesList } from '../../utils/content';
+
+const language = 'ja';
+const edges = await getPostsForSearch(language);
+const categoriesList = await getCategoriesList(language);
+const title = `検索 - ${siteMetadata.titleJa}`;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath="/search"
+  />
+  <Page client:load>
+    <Search
+      client:load
+      edges={edges}
+      totalCount={edges.length}
+      language={language}
+      categoriesList={categoriesList}
+    />
+  </Page>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getCategoriesList } from '../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+const language = 'ja';
+const categories = await getCategoriesList(language);
+const title = `カテゴリー - ${siteMetadata.titleJa}`;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath="/categories"
+  />
+  <Page client:load title="カテゴリー">
+    <ul>
+      {categories.map(cat => (
+        <li>
+          <a href={`/category/${kebabCase(cat.fieldValue)}/ja`}>
+            {cat.fieldValue} ({cat.totalCount})
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Page>
+</BaseLayout>

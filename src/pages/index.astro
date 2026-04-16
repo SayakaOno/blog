@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Sidebar from '../components/Sidebar';
+import Feed from '../components/Feed';
+import Page from '../components/Page';
+import PaginationBox from '../components/PaginationBox';
+import siteMetadata from '../data/siteMetadata.js';
+import { getIndexPosts, makeEdge, computePaginationDates } from '../utils/content';
+
+const language = 'en';
+const allPosts = await getIndexPosts(language);
+const { postsPerPage } = siteMetadata;
+const totalPage = Math.ceil(allPosts.length / postsPerPage);
+const currentPage = 0;
+
+const pagePosts = allPosts.slice(0, postsPerPage);
+const edges = pagePosts.map(makeEdge);
+const dates = computePaginationDates(allPosts, postsPerPage);
+
+const title = siteMetadata.title;
+const description = siteMetadata.subtitle;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath="/ja"
+    isIndex={true}
+  />
+  <Page client:load>
+    <Feed edges={edges} language={language} />
+    {totalPage > 1 && (
+      <PaginationBox
+        client:load
+        currentPage={currentPage}
+        totalPage={totalPage}
+        prevPagePath="/"
+        nextPagePath="/page/1"
+        hasPrevPage={false}
+        hasNextPage={totalPage > 1}
+        language={language}
+        dates={dates}
+      />
+    )}
+  </Page>
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Post from '../../components/Post';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getIndexPosts, getPublishedPosts, makeGatsbyPost, entrySlug } from '../../utils/content';
+
+export async function getStaticPaths() {
+  // Index posts (home !== false) get prev/next navigation
+  const enIndex = await getIndexPosts('en');
+  const jaIndex = await getIndexPosts('ja');
+  // Search-only posts (home === false) get no prev/next
+  const enSearch = await getPublishedPosts('en').then(all =>
+    all.filter(p => p.data.home === false)
+  );
+  const jaSearch = await getPublishedPosts('ja').then(all =>
+    all.filter(p => p.data.home === false)
+  );
+
+  const paths = [];
+
+  const addPaths = (posts, withNavigation) => {
+    posts.forEach((post, i) => {
+      const slug = entrySlug(post).replace(/^\/posts\//, '').replace(/^\//, '');
+      const prev = withNavigation ? posts[i + 1] ?? null : null;
+      const next = withNavigation ? posts[i - 1] ?? null : null;
+      paths.push({
+        params: { slug },
+        props: {
+          entry: post,
+          prevEntry: prev,
+          nextEntry: next,
+        },
+      });
+    });
+  };
+
+  addPaths(enIndex, true);
+  addPaths(jaIndex, true);
+  addPaths(enSearch, false);
+  addPaths(jaSearch, false);
+
+  return paths;
+}
+
+const { entry, prevEntry, nextEntry } = Astro.props;
+const { Content } = await render(entry);
+
+const postObj = await makeGatsbyPost(entry);
+const language = entry.data.language;
+const title = `${entry.data.title} - ${language === 'en' ? siteMetadata.title : siteMetadata.titleJa}`;
+const description = entry.data.description ?? (language === 'en' ? siteMetadata.subtitle : siteMetadata.subtitleJa);
+
+const makePrevNext = (e) => e ? {
+  slug: entrySlug(e),
+  title: e.data.title,
+  date: e.data.date,
+} : null;
+
+const prev = makePrevNext(prevEntry);
+const next = makePrevNext(nextEntry);
+
+// Language switcher: use post's link field if present, otherwise no counterpart
+const otherLanguagePath = entry.data.link ?? null;
+
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Post
+    client:load
+    post={postObj}
+    language={language}
+    prev={prev}
+    next={next}
+    author={siteMetadata.author}
+    siteUrl={siteMetadata.url}
+    disqusShortname={siteMetadata.disqusShortname}
+  >
+    <Content />
+  </Post>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Sidebar from '../components/Sidebar';
+import Page from '../components/Page';
+import siteMetadata from '../data/siteMetadata.js';
+
+// Astro 404 pages don't have access to URL during build, default to English
+const language = 'en';
+const title = `${siteMetadata.title} - Not Found`;
+const pathname = '/404';
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={null}
+  />
+  <Page client:load title="NOT FOUND">
+    <p>You just hit a route that doesn't exist... the sadness.</p>
+  </Page>
+</BaseLayout>

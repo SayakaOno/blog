@@ -1,6 +1,4 @@
-// @flow
 import React from 'react';
-import { Link } from 'gatsby';
 import Author from './Author';
 import Comments from './Comments';
 import Content from './Content';
@@ -9,61 +7,54 @@ import Tags from './Tags';
 import Pagination from './Pagination';
 import RelatedPosts from './RelatedPosts';
 import styles from './Post.module.scss';
-import type { Node } from '../../types';
 
-type Props = {
-  post: Node
-};
-
-const Post = (props: Props) => {
-  const { post, language, prev, next, backLink, stateForSearchPage } = props;
-  const { html } = post;
+const Post = ({ post, language, prev, next, author, siteUrl, disqusShortname, children }) => {
   const { categorySlug, tagSlugs, slug } = post.fields;
   const { category, tags, title, date, updatedDate } = post.frontmatter;
+  const home = language === 'en' ? '/' : '/ja';
 
   return (
     <div className={styles['post']}>
       <div className={styles['post__inner']}>
         <div className={styles['post__content']}>
           <Content
-            body={html}
             title={title}
             language={language}
             fields={post.fields}
             frontmatter={post.frontmatter}
-          />
+          >
+            {children}
+          </Content>
         </div>
 
         <div className={styles['post__footer']}>
           <Meta date={date} updatedDate={updatedDate} language={language} />
           <div className={styles['post__footer-category']}>
             {language === 'en' ? 'Category: ' : 'カテゴリー： '}
-            <Link to={`${categorySlug}${language === 'en' ? '' : '/ja'}`}>
+            <a href={`${categorySlug}${language === 'en' ? '' : '/ja'}`}>
               {category}
-            </Link>
+            </a>
           </div>
           {tags && tagSlugs && (
             <Tags tags={tags} tagSlugs={tagSlugs} language={language} />
           )}
           {post.frontmatter.related ? (
-            <RelatedPosts
-              language={language}
-              posts={post.frontmatter.related}
-            />
+            <RelatedPosts language={language} posts={post.frontmatter.related} />
           ) : null}
-          <Link
-            className={styles['post__home-button']}
-            to={backLink ? backLink : language === 'en' ? '/' : '/ja'}
-            state={backLink ? stateForSearchPage : null}
-          >
+          <a className={styles['post__home-button']} href={home}>
             {language === 'en' ? '← Back' : '← もどる'}
-          </Link>
+          </a>
           <Pagination language={language} prev={prev} next={next} />
-          <Author language={language} />
+          <Author author={author} language={language} />
         </div>
 
         <div className={styles['post__comments']}>
-          <Comments postSlug={slug} postTitle={post.frontmatter.title} />
+          <Comments
+            postSlug={slug}
+            postTitle={title}
+            siteUrl={siteUrl}
+            disqusShortname={disqusShortname}
+          />
         </div>
       </div>
     </div>

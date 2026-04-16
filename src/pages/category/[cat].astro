@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Feed from '../../components/Feed';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getCollection } from 'astro:content';
+import { makeEdge, getCategoriesList } from '../../utils/content';
+import kebabCase from 'lodash/kebabCase';
+
+export async function getStaticPaths() {
+  const categories = await getCategoriesList('en');
+  const allPosts = await getCollection('posts', ({ data }) =>
+    !data.draft && data.language === 'en'
+  );
+
+  return categories.map(({ fieldValue }) => {
+    const catPosts = allPosts
+      .filter(p => p.data.category === fieldValue)
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+    return {
+      params: { cat: kebabCase(fieldValue) },
+      props: { catName: fieldValue, edges: catPosts.map(makeEdge) },
+    };
+  });
+}
+
+const { catName, edges } = Astro.props;
+const language = 'en';
+const title = `${catName} - ${siteMetadata.title}`;
+
+const jaCategories = await getCategoriesList('ja');
+const jaCatExists = jaCategories.some(c => c.fieldValue === catName);
+const otherLanguagePath = jaCatExists ? `/category/${kebabCase(catName)}/ja` : null;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title={catName}>
+    <Feed edges={edges} language={language} />
+  </Page>
+</BaseLayout>

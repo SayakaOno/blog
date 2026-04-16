@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Feed from '../../components/Feed';
+import Page from '../../components/Page';
+import PaginationBox from '../../components/PaginationBox';
+import siteMetadata from '../../data/siteMetadata.js';
+import { getIndexPosts, makeEdge, computePaginationDates } from '../../utils/content';
+
+export async function getStaticPaths() {
+  const language = 'en';
+  const allPosts = await getIndexPosts(language);
+  const { postsPerPage } = siteMetadata;
+  const totalPage = Math.ceil(allPosts.length / postsPerPage);
+  const dates = computePaginationDates(allPosts, postsPerPage);
+
+  // Page 0 is at / (index.astro), generate pages 1..totalPage-1
+  return Array.from({ length: Math.max(0, totalPage - 1) }, (_, i) => {
+    const page = i + 1;
+    const pagePosts = allPosts.slice(page * postsPerPage, (page + 1) * postsPerPage);
+    return {
+      params: { page: String(page) },
+      props: { currentPage: page, totalPage, edges: pagePosts.map(makeEdge), dates },
+    };
+  });
+}
+
+const { currentPage, totalPage, edges, dates } = Astro.props;
+const language = 'en';
+const pageTitle = `Page ${currentPage + 1} - ${siteMetadata.title}`;
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={pageTitle} description={siteMetadata.subtitle} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath="/ja"
+  />
+  <Page client:load>
+    <Feed edges={edges} language={language} />
+    <PaginationBox
+      client:load
+      currentPage={currentPage}
+      totalPage={totalPage}
+      prevPagePath={currentPage <= 1 ? '/' : `/page/${currentPage - 1}`}
+      nextPagePath={`/page/${currentPage + 1}`}
+      hasPrevPage={currentPage > 0}
+      hasNextPage={currentPage < totalPage - 1}
+      language={language}
+      dates={dates}
+    />
+  </Page>
+</BaseLayout>

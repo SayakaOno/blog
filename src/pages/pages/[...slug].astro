@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map(page => {
+    const slug = page.id.replace(/\.md$/, '');
+    return { params: { slug }, props: { entry: page } };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const slug = entry.id.replace(/\.md$/, '');
+const language = slug.endsWith('/ja') ? 'ja' : 'en';
+const siteTitle = language === 'en' ? siteMetadata.title : siteMetadata.titleJa;
+const siteSubtitle = language === 'en' ? siteMetadata.subtitle : siteMetadata.subtitleJa;
+const title = `${entry.data.title} - ${siteTitle}`;
+const description = entry.data.description ?? siteSubtitle;
+
+// Other language version: just flip /ja suffix
+const basePath = `/pages/${slug}`;
+const otherLanguagePath = language === 'en'
+  ? `/pages/${slug}/ja`
+  : `/pages/${slug.replace(/\/ja$/, '')}`;
+
+const pathname = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={description} language={language}>
+  <Sidebar
+    client:load
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title={entry.data.title}>
+    <Content />
+  </Page>
+</BaseLayout>
