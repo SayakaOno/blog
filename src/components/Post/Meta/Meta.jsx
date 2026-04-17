@@ -1,13 +1,8 @@
-// @flow
 import React from 'react';
 import moment from 'moment';
 import styles from './Meta.module.scss';
 
-type Props = {
-  date: string
-};
-
-const Meta = ({ date, updatedDate, language }: Props) => (
+const Meta = ({ date, updatedDate, language }) => (
   <div className={styles['meta']}>
     <div className={styles['meta__date']}>
       <div>
