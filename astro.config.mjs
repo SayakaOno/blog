@@ -12,11 +12,7 @@ export default defineConfig({
   site: 'https://blog.sayaka-ono.com',
   trailingSlash: 'ignore',
   integrations: [
-    react({
-      babel: {
-        plugins: ['@babel/plugin-transform-flow-strip-types'],
-      },
-    }),
+    react(),
     sitemap(),
   ],
   markdown: {
