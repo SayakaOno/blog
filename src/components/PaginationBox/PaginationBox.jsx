@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, createRef } from 'react';
 import { formatDateMonth } from '../../utils/format-date';
 import { getIcon } from '../../utils';
 import Icon from '../Icon';
@@ -6,13 +6,13 @@ import Search from './Search';
 import styles from './PaginationBox.module.scss';
 
 const PaginationBox = ({ currentPage, totalPage, language, dates }) => {
-  const paginationBoxRef = React.createRef();
-  const paginationListRef = React.createRef();
-  const paginationUlRef = React.createRef();
-  const activePageRef = React.createRef();
-  const arrowLeft = React.createRef();
-  const arrowRight = React.createRef();
-  const toolTipRef = React.createRef();
+  const paginationBoxRef = createRef();
+  const paginationListRef = createRef();
+  const paginationUlRef = createRef();
+  const activePageRef = createRef();
+  const arrowLeft = createRef();
+  const arrowRight = createRef();
+  const toolTipRef = createRef();
 
   let scrollId = null;
 

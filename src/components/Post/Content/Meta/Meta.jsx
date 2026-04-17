@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatDateShort } from '../../../../utils/format-date';
 import { getIcon } from '../../../../utils';
 import Icon from '../../../Icon';

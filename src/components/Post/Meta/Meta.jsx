@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatDate } from '../../../utils/format-date';
 import styles from './Meta.module.scss';
 

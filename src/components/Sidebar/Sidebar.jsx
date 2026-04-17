@@ -1,4 +1,3 @@
-import React from 'react';
 import Author from './Author';
 import LanguageSwitcher from './LanguageSwitcher';
 import Contacts from './Contacts';

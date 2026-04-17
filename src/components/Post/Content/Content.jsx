@@ -1,4 +1,3 @@
-import React from 'react';
 import Meta from './Meta/Meta';
 import styles from './Content.module.scss';
 

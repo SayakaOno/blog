@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Author.module.scss';
 
 const Author = ({ author, isIndex, language }) => {

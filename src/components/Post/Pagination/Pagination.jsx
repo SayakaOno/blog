@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatDate, formatDateMachine } from '../../../utils/format-date';
 import styles from './Pagination.module.scss';
 

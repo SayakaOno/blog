@@ -1,4 +1,3 @@
-import React from 'react';
 import { formatDateShort, formatDateMachine } from '../../utils/format-date';
 import styles from './Feed.module.scss';
 

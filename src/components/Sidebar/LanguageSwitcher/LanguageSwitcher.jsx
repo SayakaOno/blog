@@ -1,4 +1,4 @@
-import React from 'react';
+import { createRef } from 'react';
 import styles from './LanguageSwitcher.module.scss';
 
 /**
@@ -7,7 +7,7 @@ import styles from './LanguageSwitcher.module.scss';
  *   - null   → the other language version doesn't exist (button disabled)
  */
 const LanguageSwitcher = ({ language, otherLanguagePath }) => {
-  const ref = React.createRef();
+  const ref = createRef();
 
   const handleSwitch = (clickedLang) => {
     if (clickedLang === language || !otherLanguagePath) return;

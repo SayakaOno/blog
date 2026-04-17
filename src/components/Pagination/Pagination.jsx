@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames/bind';
 import { PAGINATION } from '../../constants';
 import styles from './Pagination.module.scss';

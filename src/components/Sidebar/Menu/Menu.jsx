@@ -1,4 +1,3 @@
-import React from 'react';
 import { getIcon } from '../../../utils';
 import Icon from '../../Icon';
 import styles from './Menu.module.scss';

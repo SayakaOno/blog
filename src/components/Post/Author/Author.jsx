@@ -1,4 +1,3 @@
-import React from 'react';
 import { getContactHref, getIcon } from '../../../utils';
 import styles from './Author.module.scss';
 import Icon from '../../Icon/Icon';

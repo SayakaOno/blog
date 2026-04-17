@@ -1,4 +1,3 @@
-import React from 'react';
 import Author from './Author';
 import Comments from './Comments';
 import Content from './Content';
