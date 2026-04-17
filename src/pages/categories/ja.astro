@@ -3,8 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar';
 import Page from '../../components/Page';
 import siteMetadata from '../../data/siteMetadata.js';
-import { getCategoriesList } from '../../utils/content';
-import kebabCase from 'lodash/kebabCase';
+import { getCategoriesList, kebabCase } from '../../utils/content';
+
 
 const language = 'ja';
 const categories = await getCategoriesList(language);

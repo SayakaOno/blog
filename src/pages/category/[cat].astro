@@ -5,8 +5,8 @@ import Feed from '../../components/Feed';
 import Page from '../../components/Page';
 import siteMetadata from '../../data/siteMetadata.js';
 import { getCollection } from 'astro:content';
-import { makeEdge, getCategoriesList } from '../../utils/content';
-import kebabCase from 'lodash/kebabCase';
+import { makeEdge, getCategoriesList, kebabCase } from '../../utils/content';
+
 
 export async function getStaticPaths() {
   const categories = await getCategoriesList('en');

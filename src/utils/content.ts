@@ -6,7 +6,9 @@
  */
 
 import { getCollection } from 'astro:content';
-import kebabCase from 'lodash/kebabCase';
+
+export const kebabCase = (str: string): string =>
+  str.toLowerCase().replace(/\s+/g, '-');
 
 // ---------------------------------------------------------------------------
 // Types

@@ -6,8 +6,8 @@ import Page from '../../components/Page';
 import Pagination from '../../components/Pagination';
 import siteMetadata from '../../data/siteMetadata.js';
 import { getCollection, type Language } from 'astro:content';
-import { makeEdge, entrySlug, getTagsList } from '../../utils/content';
-import kebabCase from 'lodash/kebabCase';
+import { makeEdge, entrySlug, getTagsList, kebabCase } from '../../utils/content';
+
 
 export async function getStaticPaths() {
   const language: Language = 'en';
