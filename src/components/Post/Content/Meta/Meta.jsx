@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { formatDateShort } from '../../../../utils/format-date';
 import { getIcon } from '../../../../utils';
 import Icon from '../../../Icon';
 import styles from './Meta.module.scss';
@@ -13,12 +13,12 @@ const Meta = ({ language, fields, frontmatter }) => {
       <div className={styles['meta']}>
         <ul className={styles['meta__date']}>
           <li>
-            {moment(date).format(language === 'en' ? 'MMMM D, YYYY' : 'YYYY/MM/DD')}
+            {formatDateShort(date, language)}
           </li>
           {updatedDate && (
             <li>
               <Icon icon={getIcon('update')} />
-              {moment(updatedDate).format(language === 'en' ? 'MMMM D, YYYY' : 'YYYY/MM/DD')}
+              {formatDateShort(updatedDate, language)}
             </li>
           )}
         </ul>

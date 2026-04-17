@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { formatDateShort, formatDateMachine } from '../../utils/format-date';
 import styles from './Feed.module.scss';
 
 const Feed = ({ edges, language }) => (
@@ -9,11 +9,9 @@ const Feed = ({ edges, language }) => (
         <div className={styles['feed__item-meta']}>
           <time
             className={styles['feed__item-meta-time']}
-            dateTime={moment(edge.node.frontmatter.date).format('MMMM D, YYYY')}
+            dateTime={formatDateMachine(edge.node.frontmatter.date)}
           >
-            {moment(edge.node.frontmatter.date).format(
-              language === 'en' ? 'MMMM D, YYYY' : 'YYYY/MM/DD'
-            )}
+            {formatDateShort(edge.node.frontmatter.date, language)}
           </time>
           <span className={styles['feed__item-meta-divider']} />
           <span className={styles['feed__item-meta-category']}>

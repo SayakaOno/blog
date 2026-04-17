@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { formatDate, formatDateMachine } from '../../../utils/format-date';
 import styles from './Pagination.module.scss';
 
 const Pagination = ({ language, prev, next }) => {
@@ -9,7 +9,7 @@ const Pagination = ({ language, prev, next }) => {
       <div className={styles['pagination__prev']}>
         <a className={styles['pagination__prev__link']} href={prev.slug}>
           <div className={styles['pagination__prev__link-date']}>
-            {moment(prev.date).format(language === 'en' ? 'MMMM D, YYYY' : 'YYYY-MM-DD')}
+            {language === 'en' ? formatDate(prev.date, 'en') : formatDateMachine(prev.date)}
           </div>
           <div className={styles['pagination__prev__link-title']}>
             <span>←</span> {prev.title}
@@ -25,7 +25,7 @@ const Pagination = ({ language, prev, next }) => {
       <div className={styles['pagination__next']}>
         <a className={styles['pagination__next__link']} href={next.slug}>
           <div className={styles['pagination__next__link-date']}>
-            {moment(next.date).format(language === 'en' ? 'MMMM D, YYYY' : 'YYYY-MM-DD')}
+            {language === 'en' ? formatDate(next.date, 'en') : formatDateMachine(next.date)}
           </div>
           <div className={styles['pagination__next__link-title']}>
             {next.title} <span>→</span>

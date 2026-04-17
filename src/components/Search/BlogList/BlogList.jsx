@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { formatDateShort, formatDateMachine } from '../../../utils/format-date';
 import { getIcon } from '../../../utils';
 import Icon from '../../Icon';
 import styles from './BlogList.module.scss';
@@ -22,11 +22,9 @@ const BlogList = ({ edges, filters, language }) => {
             <div className={styles['blog-list__item-meta']}>
               <time
                 className={styles['blog-list__item-meta-time']}
-                dateTime={moment(edge.node.frontmatter.date).format('MMMM D, YYYY')}
+                dateTime={formatDateMachine(edge.node.frontmatter.date)}
               >
-                {moment(edge.node.frontmatter.date).format(
-                  language === 'en' ? 'MMMM D, YYYY' : 'YYYY/MM/DD'
-                )}
+                {formatDateShort(edge.node.frontmatter.date, language)}
               </time>
               <span className={styles['blog-list__item-meta-divider']} />
             </div>

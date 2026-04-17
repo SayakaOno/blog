@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import moment from 'moment';
+import { formatDateMonth } from '../../utils/format-date';
 import { getIcon } from '../../utils';
 import Icon from '../Icon';
 import Search from './Search';
@@ -188,7 +188,7 @@ const PaginationBox = ({ currentPage, totalPage, language, dates }) => {
   };
 
   const renderDate = date => {
-    return moment(date).format(language === 'en' ? 'MMM, YYYY' : 'YYYY年M月');
+    return formatDateMonth(date, language);
   };
 
   const renderLeftArrow = () => {
