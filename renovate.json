@@ -8,8 +8,8 @@
       "groupName": "eslint"
     },
     {
-      "packagePatterns": ["gatsby"],
-      "groupName": "gatsby"
+      "packagePatterns": ["^astro|^@astrojs"],
+      "groupName": "astro"
     },
     {
       "packageNames": ["react", "react-dom"],
