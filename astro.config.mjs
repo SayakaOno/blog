@@ -7,14 +7,13 @@ import rehypeExternalLinks from 'rehype-external-links';
 import remarkSmartypants from 'remark-smartypants';
 import remarkGfm from 'remark-gfm';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.sayaka-ono.com',
   trailingSlash: 'ignore',
-  integrations: [
-    react(),
-    sitemap(),
-  ],
+  integrations: [react(), sitemap(), mdx()],
   markdown: {
     syntaxHighlight: 'prism',
     remarkPlugins: [
