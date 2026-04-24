@@ -15,7 +15,7 @@ const Menu = ({ menu, language, pathname }) => {
     <nav className={styles['menu']}>
       <ul className={styles['menu__list']}>
         {menu.map(item => {
-          const href = `${item.path}${language === 'en' ? '' : '/ja'}`;
+          const href = language === 'en' ? item.path : (item.path === '/' ? '/ja' : `${item.path}/ja`);
           const active = isActive(item.path);
           return (
             <li className={styles['menu__list-item']} key={item.path}>
