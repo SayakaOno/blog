@@ -1,4 +1,5 @@
 import { createRef } from 'react';
+import { navigate } from 'astro:transitions/client';
 import styles from './LanguageSwitcher.module.scss';
 
 /**
@@ -15,7 +16,7 @@ const LanguageSwitcher = ({ language, otherLanguagePath }) => {
       ref.current.style.left = clickedLang === 'ja' ? '50%' : '0';
     }
     setTimeout(() => {
-      window.location.href = otherLanguagePath;
+      navigate(otherLanguagePath);
     }, 30);
   };
 
