@@ -2,7 +2,6 @@ import { ICONS } from '../constants';
 
 const getIcon = (name: string) => {
   const icon = {
-    twitter: ICONS.TWITTER,
     github: ICONS.GITHUB,
     contact: ICONS.EMAIL,
     email: ICONS.EMAIL,
@@ -11,7 +10,6 @@ const getIcon = (name: string) => {
     portfolio: ICONS.PORTFOLIO,
     search: ICONS.SEARCH,
     about: ICONS.PERSON,
-    home: ICONS.HOME,
     category: ICONS.FOLDER,
     tag: ICONS.TAG,
     update: ICONS.UPDATE,

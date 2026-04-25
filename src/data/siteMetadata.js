@@ -12,10 +12,6 @@ const siteMetadata = {
   googleAnalyticsId: 'UA-146464931-1',
   menu: [
     {
-      label: { en: 'Home', ja: 'ホーム' },
-      path: '/',
-    },
-    {
       label: { en: 'About', ja: 'について' },
       path: '/pages/about',
     },
