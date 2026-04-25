@@ -1,64 +1,25 @@
 import { ICONS } from '../constants';
 
 const getIcon = (name: string) => {
-  let icon;
+  const icon = {
+    twitter: ICONS.TWITTER,
+    github: ICONS.GITHUB,
+    contact: ICONS.EMAIL,
+    email: ICONS.EMAIL,
+    rss: ICONS.RSS,
+    linkedin: ICONS.LINKEDIN,
+    portfolio: ICONS.PORTFOLIO,
+    search: ICONS.SEARCH,
+    about: ICONS.PERSON,
+    home: ICONS.HOME,
+    category: ICONS.FOLDER,
+    tag: ICONS.TAG,
+    update: ICONS.UPDATE,
+    leftarrow: ICONS.LEFTARROW,
+    rightarrow: ICONS.RIGHTARROW,
+  }[name];
 
-  switch (name) {
-    case 'twitter':
-      icon = ICONS.TWITTER;
-      break;
-    case 'github':
-      icon = ICONS.GITHUB;
-      break;
-    case 'vkontakte':
-      icon = ICONS.VKONTAKTE;
-      break;
-    case 'telegram':
-      icon = ICONS.TELEGRAM;
-      break;
-    case 'contact':
-    case 'email':
-      icon = ICONS.EMAIL;
-      break;
-    case 'rss':
-      icon = ICONS.RSS;
-      break;
-    case 'linkedin':
-      icon = ICONS.LINKEDIN;
-      break;
-    case 'portfolio':
-      icon = ICONS.PORTFOLIO;
-      break;
-    case 'search':
-      icon = ICONS.SEARCH;
-      break;
-    case 'about':
-      icon = ICONS.PERSON;
-      break;
-    case 'home':
-      icon = ICONS.HOME;
-      break;
-    case 'category':
-      icon = ICONS.FOLDER;
-      break;
-    case 'tag':
-      icon = ICONS.TAG;
-      break;
-    case 'update':
-      icon = ICONS.UPDATE;
-      break;
-    case 'leftarrow':
-      icon = ICONS.LEFTARROW;
-      break;
-    case 'rightarrow':
-      icon = ICONS.RIGHTARROW;
-      break;
-    default:
-      icon = {};
-      break;
-  }
-
-  return icon;
+  return icon || {};
 };
 
 export default getIcon;
