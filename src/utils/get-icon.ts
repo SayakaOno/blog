@@ -29,9 +29,6 @@ const getIcon = (name: string) => {
     case 'portfolio':
       icon = ICONS.PORTFOLIO;
       break;
-    case 'instagram':
-      icon = ICONS.INSTAGRAM;
-      break;
     case 'search':
       icon = ICONS.SEARCH;
       break;
