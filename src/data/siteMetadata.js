@@ -19,10 +19,6 @@ const siteMetadata = {
       label: { en: 'Search', ja: '検索' },
       path: '/search',
     },
-    {
-      label: { en: 'Contact', ja: 'コンタクト' },
-      path: '/pages/contacts',
-    },
   ],
   author: {
     name: { en: 'Sayaka Ono', ja: 'Sayaka Ono' },

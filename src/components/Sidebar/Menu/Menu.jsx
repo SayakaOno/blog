@@ -5,9 +5,6 @@ import styles from './Menu.module.scss';
 const Menu = ({ menu, language, pathname }) => {
   const isActive = (itemPath) => {
     const fullPath = `${itemPath}${language === 'en' ? '' : '/ja'}`;
-    if (itemPath === '/') {
-      return pathname === '/' || pathname === '/ja' || pathname === '/ja/';
-    }
     return pathname.startsWith(fullPath);
   };
 
