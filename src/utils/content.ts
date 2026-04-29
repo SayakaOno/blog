@@ -204,12 +204,15 @@ export async function getPublishedPosts(language: Language) {
 }
 
 // ---------------------------------------------------------------------------
-// Posts for index page (home: true or undefined, not explicitly false)
+// Posts for index page (excludes lifelog categories)
 // ---------------------------------------------------------------------------
+
+export const LIFELOG_CATEGORIES = ['海外生活', 'プライベート', '英語', 'カナダ'];
 
 export async function getIndexPosts(language: Language) {
   const posts = await getCollection('posts', ({ data }) =>
-    !data.draft && data.language === language && data.home !== false
+    !data.draft && data.language === language &&
+    !LIFELOG_CATEGORIES.includes(data.category ?? '')
   );
 
   return posts.sort(

@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+
+const language = 'en';
+const title = `Life log - ${siteMetadata.title}`;
+const pathname = Astro.url.pathname;
+const otherLanguagePath = '/lifelog/ja';
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+  <Sidebar
+    client:load
+    transition:persist="sidebar"
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title="Life log">
+    <p>No posts yet.</p>
+  </Page>
+</BaseLayout>

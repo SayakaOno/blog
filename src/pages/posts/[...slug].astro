@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar';
 import Post from '../../components/Post';
 import siteMetadata from '../../data/siteMetadata.js';
-import { getIndexPosts, getPublishedPosts, makeGatsbyPost, entrySlug } from '../../utils/content';
+import { getIndexPosts, getPublishedPosts, makeGatsbyPost, entrySlug, LIFELOG_CATEGORIES } from '../../utils/content';
 
 export async function getStaticPaths() {
   // Index posts (home !== false) get prev/next navigation
@@ -16,6 +16,10 @@ export async function getStaticPaths() {
   );
   const jaSearch = await getPublishedPosts('ja').then(all =>
     all.filter(p => p.data.home === false)
+  );
+  // Lifelog posts (not on index, not home:false) get no prev/next
+  const jaLifelog = await getPublishedPosts('ja').then(all =>
+    all.filter(p => LIFELOG_CATEGORIES.includes(p.data.category ?? '') && p.data.home !== false)
   );
 
   const paths = [];
@@ -40,6 +44,7 @@ export async function getStaticPaths() {
   addPaths(jaIndex, true);
   addPaths(enSearch, false);
   addPaths(jaSearch, false);
+  addPaths(jaLifelog, false);
 
   return paths;
 }

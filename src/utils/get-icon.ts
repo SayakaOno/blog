@@ -8,6 +8,7 @@ const getIcon = (name: string) => {
     rss: ICONS.RSS,
     linkedin: ICONS.LINKEDIN,
     portfolio: ICONS.PORTFOLIO,
+    'life log': ICONS.TEAMUG,
     search: ICONS.SEARCH,
     about: ICONS.PERSON,
     category: ICONS.FOLDER,

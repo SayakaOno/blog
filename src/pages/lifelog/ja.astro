@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar';
+import Feed from '../../components/Feed';
+import Page from '../../components/Page';
+import siteMetadata from '../../data/siteMetadata.js';
+import { makeEdge } from '../../utils/content';
+
+const LIFELOG_CATEGORIES = ['海外生活', 'プライベート', '英語', 'カナダ'];
+
+const language = 'ja';
+const allPosts = await getCollection('posts', ({ data }) =>
+  !data.draft && data.language === language && LIFELOG_CATEGORIES.includes(data.category ?? '')
+);
+allPosts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const edges = allPosts.map(makeEdge);
+
+const title = `Life log - ${siteMetadata.titleJa}`;
+const pathname = Astro.url.pathname;
+const otherLanguagePath = '/lifelog';
+---
+
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+  <Sidebar
+    client:load
+    transition:persist="sidebar"
+    siteMetadata={siteMetadata}
+    pathname={pathname}
+    otherLanguagePath={otherLanguagePath}
+  />
+  <Page client:load title="Life log">
+    <Feed edges={edges} language={language} />
+  </Page>
+</BaseLayout>
