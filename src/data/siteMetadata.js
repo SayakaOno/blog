@@ -9,7 +9,7 @@ const siteMetadata = {
   copyright: `© ${new Date().getFullYear()} Sayaka Ono`,
   disqusShortname: 'blog-by-sayakaono',
   postsPerPage: 10,
-  googleAnalyticsId: 'UA-146464931-1',
+  googleAnalyticsId: 'G-J1JDC4M2BB',
   menu: [
     {
       label: { en: 'About', ja: 'About' },
