@@ -27,8 +27,8 @@ const siteMetadata = {
   author: {
     name: { en: 'Sayaka Ono', ja: 'Sayaka Ono' },
     bio: {
-      en: 'Developer based in Vancouver.',
-      ja: '高知出身・バンクーバー在住ディベロッパー。',
+      en: 'Software developer based in Vancouver from Kochi 🇯🇵',
+      ja: '高知出身・バンクーバー在住ソフトウェアエンジニア',
     },
     contacts: {
       portfolio: {
