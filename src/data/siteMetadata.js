@@ -3,9 +3,9 @@ const siteMetadata = {
   pathPrefix: '/',
   title: 'Blog by Sayaka Ono',
   titleJa: 'ブログ by Sayaka Ono',
-  subtitle: 'Blogs about what I learned as a developer.',
+  subtitle: 'Blogs about what I learned as a software developer.',
   subtitleJa:
-    'ディベロッパーとしてバンクーバーで就職して学んだことや日々のこと。',
+    'バンクーバーでソフトウェアエンジニアとして学んだことや日々のこと。',
   copyright: `© ${new Date().getFullYear()} Sayaka Ono`,
   disqusShortname: 'blog-by-sayakaono',
   postsPerPage: 10,
