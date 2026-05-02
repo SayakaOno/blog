@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /** 
  * Variables
  */
@@ -11,9 +13,9 @@ $color-secondary: #ea6a47;
 // $color-secondary: #d0422c;
 
 $color-white: #fff;
-$color-gray: lighten($color-base, 40%);
-$color-gray-border: lighten($color-base, 77%);
-$color-gray-bg: lighten($color-base, 79%);
+$color-gray: color.adjust($color-base, $lightness: 40%, $space: hsl);
+$color-gray-border: color.adjust($color-base, $lightness: 77%, $space: hsl);
+$color-gray-bg: color.adjust($color-base, $lightness: 79%, $space: hsl);
 
 // Typographic
 $typographic-font-family: -apple-system, BlinkMacSystemFont,

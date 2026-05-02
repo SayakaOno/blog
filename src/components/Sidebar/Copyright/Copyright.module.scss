@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @use '../../../assets/scss/variables' as variables;
 @use '../../../assets/scss/mixins' as *;
 
@@ -7,6 +9,6 @@
   @include breakpoint-sm {
     display: block;
   }
-  color: lighten(variables.$color-gray, 18%);
+  color: color.adjust(variables.$color-gray, $lightness: 18%, $space: hsl);
   font-size: variables.$typographic-small-font-size;
 }
