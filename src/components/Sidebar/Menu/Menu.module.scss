@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .menu {
   margin-left: auto;
@@ -14,8 +14,8 @@
 
       &-link {
         display: inline-block;
-        font-size: $typographic-base-font-size;
-        color: $typographic-base-font-color;
+        font-size: variables.$typographic-base-font-size;
+        color: variables.$typographic-base-font-color;
         font-weight: normal;
         padding: 0 4px;
         border-bottom: 1px solid transparent;
@@ -32,20 +32,20 @@
 
         &:hover,
         &:focus {
-          color: $color-base;
+          color: variables.$color-base;
         }
         &:hover {
-          border-bottom: 1px solid $color-secondary;
+          border-bottom: 1px solid variables.$color-secondary;
           svg {
-            color: $color-secondary;
+            color: variables.$color-secondary;
           }
         }
 
         &--active {
-          color: $color-base;
+          color: variables.$color-base;
 
           svg {
-            color: $color-secondary;
+            color: variables.$color-secondary;
           }
 
           &:hover,
@@ -58,8 +58,8 @@
     }
   }
 
-  @include breakpoint-sm {
-    @include margin-bottom(1.4);
+  @include mixins.breakpoint-sm {
+    @include mixins.margin-bottom(1.4);
 
     &__list {
       &-item {

@@ -1,10 +1,10 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .language-switcher {
   order: 4;
   position: relative;
-  border: solid 2px $color-secondary;
+  border: solid 2px variables.$color-secondary;
   overflow: hidden;
   width: 35px;
   height: 30px;
@@ -43,7 +43,7 @@
   }
 }
 
-@include breakpoint-sm {
+@include mixins.breakpoint-sm {
   .language-switcher {
     margin: 0 0 26px 0;
     width: 70px;
@@ -53,7 +53,7 @@
       z-index: 1;
       width: 35px;
       height: 100%;
-      background-color: $color-secondary;
+      background-color: variables.$color-secondary;
       transition: left ease 30ms;
     }
 

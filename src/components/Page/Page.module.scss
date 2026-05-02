@@ -1,5 +1,5 @@
-@import '../../assets/scss/variables';
-@import '../../assets/scss/mixins';
+@use '../../assets/scss/variables' as variables;
+@use '../../assets/scss/mixins' as *;
 
 .page {
   padding-top: 80px;
@@ -10,7 +10,7 @@
   }
 
   &__title {
-    font-size: $typographic-base-font-size * 2.5;
+    font-size: variables.$typographic-base-font-size * 2.5;
     font-weight: 600;
     @include line-height(2);
     @include margin-top(0);
@@ -18,7 +18,7 @@
   }
 
   &__body {
-    font-size: $typographic-base-font-size;
+    font-size: variables.$typographic-base-font-size;
     max-width: 780px;
     @include line-height(1);
     @include margin(0, 0, 1);

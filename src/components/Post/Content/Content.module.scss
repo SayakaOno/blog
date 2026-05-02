@@ -1,34 +1,34 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .content {
   max-width: 780px;
 
   &__title {
-    font-size: $typographic-base-font-size * 2;
+    font-size: variables.$typographic-base-font-size * 2;
     font-weight: 600;
-    @include line-height(1.65);
-    @include margin-top(1);
-    @include margin-bottom(0.5);
+    @include mixins.line-height(1.65);
+    @include mixins.margin-top(1);
+    @include mixins.margin-bottom(0.5);
   }
 
   &__body {
     & figure {
-      @include margin-bottom(1);
+      @include mixins.margin-bottom(1);
       width: auto;
 
       & blockquote {
         font-style: italic;
         text-align: center;
         margin-top: 0;
-        @include padding(1, 0);
+        @include mixins.padding(1, 0);
 
         & p {
-          max-width: $layout-post-width;
-          font-size: $typographic-base-font-size * 1.6817;
+          max-width: variables.$layout-post-width;
+          font-size: variables.$typographic-base-font-size * 1.6817;
           margin-top: 0;
-          @include margin-bottom(1);
-          @include line-height(1.5);
+          @include mixins.margin-bottom(1);
+          @include mixins.line-height(1.5);
         }
       }
     }
@@ -42,29 +42,29 @@
     }
   }
 
-  @include breakpoint-sm {
+  @include mixins.breakpoint-sm {
     padding: 0 15px;
   }
 
-  @include breakpoint-md {
+  @include mixins.breakpoint-md {
     padding: 0 35px 40px 35px;
 
     &__title {
-      font-size: $typographic-base-font-size * 2.4;
-      @include line-height(2.25);
-      @include margin-top(2.25);
-      @include margin-bottom(1);
+      font-size: variables.$typographic-base-font-size * 2.4;
+      @include mixins.line-height(2.25);
+      @include mixins.margin-top(2.25);
+      @include mixins.margin-bottom(1);
     }
 
     &__body {
-      font-size: $typographic-base-font-size * 1.125;
-      @include line-height(1.125);
-      @include margin-bottom(1.125);
+      font-size: variables.$typographic-base-font-size * 1.125;
+      @include mixins.line-height(1.125);
+      @include mixins.margin-bottom(1.125);
 
       & p {
-        font-size: $typographic-base-font-size * 1.125;
-        @include line-height(1.125);
-        @include margin-bottom(1.125);
+        font-size: variables.$typographic-base-font-size * 1.125;
+        @include mixins.line-height(1.125);
+        @include mixins.margin-bottom(1.125);
       }
     }
   }

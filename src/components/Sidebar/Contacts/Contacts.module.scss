@@ -1,10 +1,10 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .contacts {
   display: none;
 
-  @include breakpoint-sm {
+  @include mixins.breakpoint-sm {
     display: block;
   }
 
@@ -25,9 +25,9 @@
       align-content: center;
       align-items: center;
       justify-content: center;
-      height: $button-height;
-      width: $button-height;
-      line-height: $button-height;
+      height: variables.$button-height;
+      width: variables.$button-height;
+      line-height: variables.$button-height;
       text-align: center;
 
       &:nth-child(1) {
@@ -68,7 +68,7 @@
       &-link {
         border: 0;
         display: flex;
-        color: $color-base;
+        color: variables.$color-base;
       }
     }
   }

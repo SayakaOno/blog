@@ -1,5 +1,5 @@
-@import '../../assets/scss/variables';
-@import '../../assets/scss/mixins';
+@use '../../assets/scss/variables' as variables;
+@use '../../assets/scss/mixins' as *;
 
 .post {
   padding-top: 50px;
@@ -16,7 +16,7 @@
         color: #222;
 
         &:hover {
-          color: $color-primary;
+          color: variables.$color-primary;
         }
       }
     }
@@ -29,20 +29,20 @@
   &__home-button {
     display: block;
     max-width: 90px;
-    height: $button-height;
+    height: variables.$button-height;
     padding: 0 12px;
-    line-height: $button-height;
+    line-height: variables.$button-height;
     text-align: center;
-    color: $color-base;
-    border: 1px solid $color-gray-border;
-    border-radius: $button-border-radius;
-    font-size: $typographic-base-font-size;
+    color: variables.$color-base;
+    border: 1px solid variables.$color-gray-border;
+    border-radius: variables.$button-border-radius;
+    font-size: variables.$typographic-base-font-size;
     font-weight: normal;
     @include margin-top(1);
 
     &:hover,
     &:focus {
-      color: $color-primary;
+      color: variables.$color-primary;
     }
   }
 

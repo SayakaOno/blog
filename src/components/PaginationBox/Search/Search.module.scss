@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as *;
 
 .search {
   * {
@@ -17,8 +17,8 @@
       width: 125px;
       margin: 0 auto;
       padding: 10px 20px;
-      color: $color-secondary;
-      border: solid 1px $color-secondary;
+      color: variables.$color-secondary;
+      border: solid 1px variables.$color-secondary;
     }
   }
 }

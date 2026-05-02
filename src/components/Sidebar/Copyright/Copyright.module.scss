@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as *;
 
 .copyright {
   display: none;
@@ -7,6 +7,6 @@
   @include breakpoint-sm {
     display: block;
   }
-  color: lighten($color-gray, 18%);
-  font-size: $typographic-small-font-size;
+  color: lighten(variables.$color-gray, 18%);
+  font-size: variables.$typographic-small-font-size;
 }

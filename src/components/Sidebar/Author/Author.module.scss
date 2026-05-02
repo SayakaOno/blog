@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .author {
   &__photo {
@@ -10,34 +10,34 @@
   }
 
   &__title {
-    font-size: $typographic-base-font-size * 1.125;
+    font-size: variables.$typographic-base-font-size * 1.125;
     font-weight: 600;
     margin: 0;
-    @include line-height(1.125);
-    @include breakpoint-sm {
-      @include margin(0.5, 0, 0.3, 0);
+    @include mixins.line-height(1.125);
+    @include mixins.breakpoint-sm {
+      @include mixins.margin(0.5, 0, 0.3, 0);
     }
 
     &-link {
-      color: $color-base;
+      color: variables.$color-base;
 
       &:hover,
       &:focus {
-        color: $color-base;
+        color: variables.$color-base;
       }
     }
   }
 
   &__subtitle {
     display: none;
-    color: $color-gray;
-    @include line-height(0.8);
-    @include margin-bottom(1);
+    color: variables.$color-gray;
+    @include mixins.line-height(0.8);
+    @include mixins.margin-bottom(1);
     margin-top: 0;
 
-    @include breakpoint-sm {
+    @include mixins.breakpoint-sm {
       display: block;
-      @include margin-bottom(1.4);
+      @include mixins.margin-bottom(1.4);
     }
   }
 }

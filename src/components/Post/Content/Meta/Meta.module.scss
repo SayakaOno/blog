@@ -1,8 +1,8 @@
-@import '../../../../assets/scss/variables';
-@import '../../../../assets/scss/mixins';
+@use '../../../../assets/scss/variables' as variables;
+@use '../../../../assets/scss/mixins' as mixins;
 
 .meta {
-  @include margin-bottom(1);
+  @include mixins.margin-bottom(1);
 
   &__emoji {
     vertical-align: middle;
@@ -15,9 +15,9 @@
   &__date {
     display: flex;
     padding: 0;
-    font-size: $typographic-small-font-size;
+    font-size: variables.$typographic-small-font-size;
     font-weight: 600;
-    @include margin-bottom(0.2);
+    @include mixins.margin-bottom(0.2);
 
     li {
       display: flex;
@@ -30,17 +30,17 @@
 
   &__category {
     line-height: 1rem;
-    @include margin-bottom(0.1);
+    @include mixins.margin-bottom(0.1);
 
     &-link {
-      font-size: $typographic-small-font-size;
+      font-size: variables.$typographic-small-font-size;
       color: #222;
       text-transform: uppercase;
       display: inline-block;
 
       &:hover,
       &:focus {
-        color: $color-primary;
+        color: variables.$color-primary;
       }
     }
   }
@@ -61,7 +61,7 @@
         color: #888;
 
         &:hover {
-          color: $color-primary;
+          color: variables.$color-primary;
         }
       }
 
@@ -77,7 +77,7 @@
     }
   }
 
-  @include breakpoint-sm {
-    @include margin-bottom(1.5);
+  @include mixins.breakpoint-sm {
+    @include mixins.margin-bottom(1.5);
   }
 }

@@ -1,5 +1,6 @@
-@import '../../assets/scss/variables';
-@import '../../assets/scss/mixins';
+@use "sass:color";
+@use '../../assets/scss/variables' as variables;
+@use '../../assets/scss/mixins' as *;
 
 .pagination {
   @include margin-top(2);
@@ -10,18 +11,18 @@
     text-align: left;
 
     &-link {
-      color: $color-secondary;
+      color: variables.$color-secondary;
       font-size: 26px;
       font-weight: bold;
 
       &:hover,
       &:focus {
-        color: $color-primary;
+        color: variables.$color-primary;
       }
 
       &--disable {
         pointer-events: none;
-        color: lighten($color-gray, 20%);
+        color: color.adjust(variables.$color-gray, $lightness: 20%);
       }
 
     }
@@ -33,18 +34,18 @@
     text-align: right;
 
     &-link {
-      color: $color-secondary;
+      color: variables.$color-secondary;
       font-size: 26px;
       font-weight: bold;
 
       &:hover,
       &:focus {
-        color: $color-primary;
+        color: variables.$color-primary;
       }
 
       &--disable {
         pointer-events: none;
-        color: lighten($color-gray, 20%);
+        color: color.adjust(variables.$color-gray, $lightness: 20%);
       }
 
     }

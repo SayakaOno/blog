@@ -1,5 +1,5 @@
-@import '../../assets/scss/variables';
-@import '../../assets/scss/mixins';
+@use '../../assets/scss/variables' as variables;
+@use '../../assets/scss/mixins' as *;
 
 .feed {
   &__item {
@@ -10,25 +10,25 @@
     }
 
     &-title {
-      font-size: $typographic-base-font-size * 1.6875;
+      font-size: variables.$typographic-base-font-size * 1.6875;
       @include line-height(1.5);
       @include margin-top(0);
       @include margin-bottom(0);
 
       &-link {
-        color: $color-base;
+        color: variables.$color-base;
 
         &:hover,
         &:focus {
-          color: $color-base;
-          border-bottom: 1px solid $color-base;
+          color: variables.$color-base;
+          border-bottom: 1px solid variables.$color-base;
         }
       }
     }
 
     &-description {
       color: #777;
-      font-size: $typographic-base-font-size;
+      font-size: variables.$typographic-base-font-size;
       @include line-height(1);
       @include margin-top(0.2);
       @include margin-bottom(0.75);
@@ -36,8 +36,8 @@
 
     &-meta {
       &-time {
-        font-size: $typographic-small-font-size;
-        color: $color-base;
+        font-size: variables.$typographic-small-font-size;
+        color: variables.$color-base;
         font-weight: 600;
         text-transform: uppercase;
       }
@@ -48,26 +48,26 @@
 
       &-category {
         &-link {
-          font-size: $typographic-small-font-size;
+          font-size: variables.$typographic-small-font-size;
           font-weight: 600;
           text-transform: uppercase;
 
           &:hover,
           &:focus {
-            color: $color-primary;
+            color: variables.$color-primary;
           }
         }
       }
     }
 
     &-readmore {
-      font-size: $typographic-base-font-size;
-      color: $color-primary;
+      font-size: variables.$typographic-base-font-size;
+      color: variables.$color-primary;
 
       &:hover,
       &:focus {
-        color: $color-primary;
-        border-bottom: 1px solid $color-primary;
+        color: variables.$color-primary;
+        border-bottom: 1px solid variables.$color-primary;
       }
     }
   }

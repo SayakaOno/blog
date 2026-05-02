@@ -1,5 +1,5 @@
-@import '../../assets/scss/variables';
-@import '../../assets/scss/mixins';
+@use '../../assets/scss/variables' as variables;
+@use '../../assets/scss/mixins' as *;
 
 .pagination-box {
   &__body {
@@ -88,11 +88,11 @@
             text-align: center;
 
             &:hover {
-              color: $color-secondary;
+              color: variables.$color-secondary;
             }
           }
           &-active {
-            background-color: $color-secondary;
+            background-color: variables.$color-secondary;
 
             a {
               color: #fff;

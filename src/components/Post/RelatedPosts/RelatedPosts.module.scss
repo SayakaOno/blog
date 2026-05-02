@@ -1,5 +1,5 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as *;
 
 .tags {
   @include margin-bottom(0.5);
@@ -13,14 +13,14 @@
         display: inline-block;
         margin: 0 2px;
         padding: 0 6px;
-        border: 1px solid $color-gray-border;
+        border: 1px solid variables.$color-gray-border;
         text-decoration: none;
-        color: $color-base;
+        color: variables.$color-base;
         font-size: 0.9rem;
 
         &:hover,
         &:focus {
-          color: $color-primary;
+          color: variables.$color-primary;
         }
       }
     }

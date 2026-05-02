@@ -1,28 +1,28 @@
-@import '../../../assets/scss/variables';
-@import '../../../assets/scss/mixins';
+@use '../../../assets/scss/variables' as variables;
+@use '../../../assets/scss/mixins' as mixins;
 
 .blog-list {
   &__item {
-    @include margin-bottom(1.25);
+    @include mixins.margin-bottom(1.25);
 
     &:last-child {
-      @include margin-bottom(0.5);
+      @include mixins.margin-bottom(0.5);
     }
 
     &-title {
       font-size: 1.2em;
-      @include line-height(1);
-      @include margin-top(0);
-      @include margin-bottom(0.1);
+      @include mixins.line-height(1);
+      @include mixins.margin-top(0);
+      @include mixins.margin-bottom(0.1);
 
       &-link {
-        color: $color-base;
+        color: variables.$color-base;
         display: block;
         margin-bottom: 20px;
 
         &:hover,
         &:focus {
-          color: $color-base;
+          color: variables.$color-base;
           h2 {
             text-decoration: underline;
           }
@@ -31,17 +31,17 @@
     }
 
     &-description {
-      font-size: $typographic-base-font-size;
-      @include line-height(1);
-      @include margin-bottom(0.75);
+      font-size: variables.$typographic-base-font-size;
+      @include mixins.line-height(1);
+      @include mixins.margin-bottom(0.75);
     }
 
     &-meta {
       line-height: 1em;
       margin-bottom: 2px;
       &-time {
-        font-size: $typographic-small-font-size;
-        color: $color-base;
+        font-size: variables.$typographic-small-font-size;
+        color: variables.$color-base;
         text-transform: uppercase;
       }
 
@@ -51,14 +51,14 @@
 
       &-category {
         &-link {
-          font-size: $typographic-small-font-size;
-          color: $color-secondary;
+          font-size: variables.$typographic-small-font-size;
+          color: variables.$color-secondary;
           font-weight: 600;
           text-transform: uppercase;
 
           &:hover,
           &:focus {
-            color: $color-primary;
+            color: variables.$color-primary;
           }
         }
       }
