@@ -59,10 +59,9 @@ const gaId = siteMetadata.googleAnalyticsId;
 </html>
 
 <style lang="scss">
-  @import '../assets/scss/variables';
-  @import '../assets/scss/mixins';
+  @use '../assets/scss/variables' as variables;
 
   .layout {
-    lost-center: $layout-width;
+    lost-center: variables.$layout-width;
   }
 </style>
