@@ -62,9 +62,9 @@ export function entrySlug(entry: { data: { slug?: string }; id: string }): strin
 export async function makeGatsbyPost(entry: Awaited<ReturnType<typeof getCollection<'posts'>>>[number]): Promise<GatsbyPost> {
   const slug = entrySlug(entry);
   const categorySlug = entry.data.category
-    ? `/category/${kebabCase(entry.data.category)}/`
+    ? `/category/${kebabCase(entry.data.category)}`
     : '';
-  const tagSlugs = (entry.data.tags ?? []).map(t => `/tag/${kebabCase(t)}/`);
+  const tagSlugs = (entry.data.tags ?? []).map(t => `/tag/${kebabCase(t)}`);
 
   // Resolve related post titles
   let related: Array<{ slug: string; title: string }> | undefined;
@@ -95,7 +95,7 @@ export async function makeGatsbyPost(entry: Awaited<ReturnType<typeof getCollect
 export function makeEdge(entry: Awaited<ReturnType<typeof getCollection<'posts'>>>[number]): PostEdge {
   const slug = entrySlug(entry);
   const categorySlug = entry.data.category
-    ? `/category/${kebabCase(entry.data.category)}/`
+    ? `/category/${kebabCase(entry.data.category)}`
     : '';
   return {
     node: {

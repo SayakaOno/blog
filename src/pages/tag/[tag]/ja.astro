@@ -31,7 +31,7 @@ const title = `"${tagName}"タグのブログ - ${siteMetadata.titleJa}`;
 
 const enTags = await getTagsList('en');
 const enTagExists = enTags.some(t => t.fieldValue === tagName);
-const otherLanguagePath = enTagExists ? `/tag/${kebabCase(tagName)}/` : null;
+const otherLanguagePath = enTagExists ? `/tag/${kebabCase(tagName)}` : null;
 const pathname = Astro.url.pathname;
 ---
 

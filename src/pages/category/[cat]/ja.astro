@@ -31,7 +31,7 @@ const title = `${catName} - ${siteMetadata.titleJa}`;
 
 const enCategories = await getCategoriesList('en');
 const enCatExists = enCategories.some(c => c.fieldValue === catName);
-const otherLanguagePath = enCatExists ? `/category/${kebabCase(catName)}/` : null;
+const otherLanguagePath = enCatExists ? `/category/${kebabCase(catName)}` : null;
 const pathname = Astro.url.pathname;
 ---
 
