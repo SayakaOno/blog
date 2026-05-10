@@ -16,13 +16,13 @@
       @include mixins.margin-bottom(0.1);
 
       &-link {
-        color: variables.$color-base;
+        color: var(--color-base);
         display: block;
         margin-bottom: 20px;
 
         &:hover,
         &:focus {
-          color: variables.$color-base;
+          color: var(--color-base);
           h2 {
             text-decoration: underline;
           }
@@ -41,7 +41,7 @@
       margin-bottom: 2px;
       &-time {
         font-size: variables.$typographic-small-font-size;
-        color: variables.$color-base;
+        color: var(--color-base);
         text-transform: uppercase;
       }
 
@@ -69,13 +69,13 @@
     line-height: 1.2rem;
 
     svg {
-      color: #888;
+      color: var(--color-gray);
       margin-left: 0;
     }
 
     span {
       display: inline-block;
-      color: #888;
+      color: var(--color-gray);
       border-radius: 0.15rem;
       font-size: 0.8rem;
       line-height: 1em;

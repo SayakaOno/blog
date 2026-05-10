@@ -2,6 +2,7 @@
 import '../assets/scss/init.scss';
 import siteMetadata from '../data/siteMetadata.js';
 import { ClientRouter } from 'astro:transitions';
+import ThemeSwitcher from '../components/Sidebar/ThemeSwitcher';
 
 export interface Props {
   title?: string;
@@ -31,6 +32,15 @@ const gaId = siteMetadata.googleAnalyticsId;
     <meta name="twitter:title" content={title} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/prismjs/theme.min.css" />
+    <script is:inline>
+      function applyTheme() {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', stored ?? (prefersDark ? 'dark' : 'light'));
+      }
+      applyTheme();
+      document.addEventListener('astro:after-swap', applyTheme);
+    </script>
     <ClientRouter />
     <!-- Google Analytics (UA property — consider upgrading to GA4) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
@@ -42,6 +52,7 @@ const gaId = siteMetadata.googleAnalyticsId;
     </script>
   </head>
   <body>
+    <ThemeSwitcher client:load />
     <div class="layout">
       <slot />
     </div>

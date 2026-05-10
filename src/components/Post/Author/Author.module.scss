@@ -2,7 +2,7 @@
 @use '../../../assets/scss/mixins' as *;
 
 .author {
-  border-top: 1px solid $color-gray-border;
+  border-top: 1px solid var(--color-gray-border);
   max-width: 780px;
   padding-top: 20px;
   @include line-height(1);
@@ -29,7 +29,7 @@
 
         &-link {
           border: 0;
-          color: $color-gray;
+          color: var(--color-gray);
 
           &:hover,
           &:focus {
@@ -45,7 +45,7 @@
     &-portfolio {
       line-height: 1rem;
       & a {
-        color: $color-gray;
+        color: var(--color-gray);
         font-size: 0.9rem;
         &:hover {
           color: $color-secondary;

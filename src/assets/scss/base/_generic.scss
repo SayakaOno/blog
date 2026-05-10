@@ -2,6 +2,31 @@
 @use "../mixins" as mixins;
 
 /**
+ * CSS Custom Properties (theme tokens)
+ */
+:root {
+  --color-base: #222;
+  --color-white: #fff;
+  --color-gray: #888;
+  --color-gray-border: #e6e6e6;
+  --color-gray-bg: #ebebeb;
+  --color-bg: #fff;
+  --sidebar-bg: #f5f5f5;
+  --sidebar-border: #d1d5da;
+}
+
+[data-theme="dark"] {
+  --color-base: #e8e8e8;
+  --color-white: #1a1a1a;
+  --color-gray: #999;
+  --color-gray-border: #3a3a3a;
+  --color-gray-bg: #2a2a2a;
+  --color-bg: #121212;
+  --sidebar-bg: #1e1e1e;
+  --sidebar-border: #333;
+}
+
+/**
  * Generic
  */
 html {
@@ -10,8 +35,9 @@ html {
 
 body {
   margin: 0;
+  background-color: var(--color-bg);
   font-family: variables.$typographic-font-family;
-  color: variables.$typographic-base-font-color;
+  color: var(--color-base);
   line-height: variables.$typographic-base-line-height;
   font-size: variables.$typographic-base-font-size;
   -ms-text-size-adjust: 100%;
@@ -84,7 +110,7 @@ hr {
   margin-top: 52px;
   margin-bottom: 52px;
   border: 0;
-  color: variables.$color-base;
+  color: var(--color-base);
   display: block;
   height: 26px;
   margin-right: auto;
@@ -94,8 +120,8 @@ hr {
     to bottom,
     transparent 1px,
     transparent 11px,
-    variables.$color-base 11px,
-    variables.$color-base 15px,
+    var(--color-base) 11px,
+    var(--color-base) 15px,
     transparent 15px,
     transparent 26px
   );
@@ -135,12 +161,12 @@ p {
 }
 
 blockquote {
-  background-color: #f5f5f5;
-  border-left: 4px solid variables.$color-gray-border;
+  background-color: var(--color-gray-bg);
+  border-left: 4px solid var(--color-gray-border);
   border-radius: 0 4px 4px 0;
   margin: 0;
   padding: 1em 1.5em;
-  color: variables.$color-gray;
+  color: var(--color-gray);
   font-style: italic;
 }
 
@@ -153,7 +179,7 @@ figure {
 figcaption {
   @include mixins.line-height(0.75);
   @include mixins.margin-top(0.25);
-  color: variables.$color-base;
+  color: var(--color-base);
   font-size: variables.$typographic-small-font-size;
   font-style: italic;
   margin-bottom: 0;

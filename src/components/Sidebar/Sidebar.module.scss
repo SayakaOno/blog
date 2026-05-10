@@ -6,14 +6,14 @@
   height: 54px;
   overflow: hidden;
   position: fixed;
-  background-color: #fff;
+  background-color: var(--color-white);
   z-index: 9999;
-  border-bottom: 1px solid #d1d5da;
+  border-bottom: 1px solid var(--sidebar-border);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
 
   &__inner {
     position: relative;
-    padding: 15px 15px 0;
+    padding: 15px 50px 0 15px;
     display: flex;
   }
 }
@@ -23,7 +23,7 @@
     width: 250px;
     min-height: 100vh;
     max-height: 100%;
-    background-color: #f5f5f5;
+    background-color: var(--sidebar-bg);
     overflow: auto;
     border-bottom: none;
     box-shadow: none;
@@ -33,6 +33,13 @@
       display: block;
     }
   }
+}
+
+.switchers {
+  display: flex;
+  align-items: center;
+  order: 4;
+
 }
 
 @include breakpoint-md {

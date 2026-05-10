@@ -19,18 +19,18 @@
     }
 
     &-link {
-      color: variables.$color-base;
+      color: var(--color-base);
 
       &:hover,
       &:focus {
-        color: variables.$color-base;
+        color: var(--color-base);
       }
     }
   }
 
   &__subtitle {
     display: none;
-    color: variables.$color-gray;
+    color: var(--color-gray);
     @include mixins.line-height(0.8);
     @include mixins.margin-bottom(1);
     margin-top: 0;

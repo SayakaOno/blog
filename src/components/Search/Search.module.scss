@@ -18,7 +18,7 @@
     font-size: 1.4rem;
     margin-bottom: 20px;
     font-weight: bold;
-    border-bottom: solid 3px #333;
+    border-bottom: solid 3px var(--color-base);
   }
 
   &__filter {
@@ -59,7 +59,7 @@
 
         li {
           padding: 0.2rem 0.7rem;
-          color: #222;
+          color: var(--color-base);
           border: 1px solid variables.$color-secondary;
           font-size: 0.9rem;
           font-weight: normal;
@@ -87,12 +87,12 @@
 
         li {
           padding: 0 0.5rem;
-          color: #666;
+          color: var(--color-base);
           border-radius: 0.25rem;
           font-size: 0.9rem;
           font-weight: normal;
           margin: 0 0.2rem 0.2rem 0;
-          background-color: rgb(221, 221, 221);
+          background-color: var(--color-gray-bg);
           &:before {
             content: '+ ';
             font-weight: bold;
@@ -100,8 +100,8 @@
         }
 
         &-item-selected {
-          color: rgb(221, 221, 221) !important;
-          background-color: #666 !important;
+          color: var(--color-gray-bg) !important;
+          background-color: var(--color-gray) !important;
 
           &:before {
             content: '\002713 ' !important;

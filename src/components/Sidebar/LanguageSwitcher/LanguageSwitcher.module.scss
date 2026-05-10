@@ -4,12 +4,12 @@
 .language-switcher {
   order: 4;
   position: relative;
-  border: solid 2px variables.$color-secondary;
+  background: none;
+  border: none;
   overflow: hidden;
   width: 35px;
   height: 30px;
-  background-color: #fff;
-  margin: -5px -5px 0 5px;
+  margin: -5px 0 0 5px;
 
   span {
     display: inline-block;
@@ -34,7 +34,7 @@
     }
 
     &__unavailable {
-      color: #b6b6b6;
+      color: var(--color-gray);
     }
 
     &-active {
@@ -45,6 +45,8 @@
 
 @include mixins.breakpoint-sm {
   .language-switcher {
+    border: solid 2px variables.$color-secondary;
+    background-color: var(--color-white);
     margin: 0 0 26px 0;
     width: 70px;
 
@@ -62,7 +64,7 @@
 
       &-active {
         display: inline-block !important;
-        color: #fff;
+        color: var(--color-white);
       }
     }
   }

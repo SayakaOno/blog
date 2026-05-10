@@ -15,7 +15,7 @@
       &-link {
         display: inline-block;
         font-size: variables.$typographic-base-font-size;
-        color: variables.$typographic-base-font-color;
+        color: var(--color-base);
         font-weight: normal;
         padding: 0 4px;
         border-bottom: 1px solid transparent;
@@ -32,7 +32,7 @@
 
         &:hover,
         &:focus {
-          color: variables.$color-base;
+          color: var(--color-base);
         }
         &:hover {
           border-bottom: 1px solid variables.$color-secondary;
@@ -42,7 +42,7 @@
         }
 
         &--active {
-          color: variables.$color-base;
+          color: var(--color-base);
 
           svg {
             color: variables.$color-secondary;

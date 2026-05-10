@@ -34,7 +34,7 @@
 
     &-link {
       font-size: variables.$typographic-small-font-size;
-      color: #222;
+      color: var(--color-base);
       text-transform: uppercase;
       display: inline-block;
 
@@ -58,7 +58,7 @@
       margin: 0 0.2rem 0.2rem 0;
 
       &-link {
-        color: #888;
+        color: var(--color-gray);
 
         &:hover {
           color: variables.$color-primary;
