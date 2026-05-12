@@ -1,8 +1,9 @@
 @use '../../../assets/scss/mixins' as mixins;
+@use '../../../assets/scss/variables' as variables;
 
 .theme-switcher {
   position: fixed;
-  top: 12px;
+  top: 17px;
   right: 15px;
   z-index: 10000;
   background: none;
@@ -17,7 +18,7 @@
 
   @include mixins.breakpoint-sm {
     top: 0;
-    right: 16px;
+    right: max(0px, calc((100vw - #{variables.$layout-max-width}) / 2));
     width: 36px;
     height: 36px;
     border-radius: 0 0 50% 50%;

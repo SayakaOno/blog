@@ -30,12 +30,28 @@
  * Generic
  */
 html {
-  font-size: variables.$typographic-root-font-size;
+  font-size: variables.$typographic-root-font-size; 
 }
 
 body {
   margin: 0;
   background-color: var(--color-bg);
+
+  @include mixins.breakpoint-sm {
+    background-image: linear-gradient(
+      to right,
+      var(--sidebar-bg) max(250px, calc(50% - #{variables.$layout-max-width} / 2 + 250px)),
+      var(--color-bg) max(250px, calc(50% - #{variables.$layout-max-width} / 2 + 250px))
+    );
+  }
+
+  @include mixins.breakpoint-md {
+    background-image: linear-gradient(
+      to right,
+      var(--sidebar-bg) max(280px, calc(50% - #{variables.$layout-max-width} / 2 + 280px)),
+      var(--color-bg) max(280px, calc(50% - #{variables.$layout-max-width} / 2 + 280px))
+    );
+  }
   font-family: variables.$typographic-font-family;
   color: var(--color-base);
   line-height: variables.$typographic-base-line-height;

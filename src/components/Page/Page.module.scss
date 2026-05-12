@@ -3,10 +3,13 @@
 
 .page {
   padding-top: 80px;
+  max-width: variables.$layout-max-width;
 
   &__inner {
     padding: 25px 20px;
     @include margin-bottom(2);
+    max-width: 780px;
+    margin: 0 auto;
   }
 
   &__title {
@@ -19,7 +22,6 @@
 
   &__body {
     font-size: variables.$typographic-base-font-size;
-    max-width: 780px;
     @include line-height(1);
     @include margin(0, 0, 1);
   }

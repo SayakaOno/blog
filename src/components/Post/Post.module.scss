@@ -3,14 +3,15 @@
 
 .post {
   padding-top: 50px;
+  max-width: variables.$layout-max-width;
 
   &__inner {
     padding: 25px 20px;
+    max-width: 780px;
+    margin: 0 auto;
   }
 
   &__footer {
-    max-width: 780px;
-
     &-category {
       a {
         color: var(--color-base);
@@ -20,10 +21,6 @@
         }
       }
     }
-  }
-
-  &__comments {
-    max-width: 780px;
   }
 
   &__home-button {
@@ -51,15 +48,11 @@
     padding-left: 250px;
 
     &__footer {
-      padding: 20px 15px 40px 15px;
+      padding: 20px 0 40px 0;
     }
 
     &__container {
       overflow: auto;
-    }
-
-    &__comments {
-      padding: 0 15px;
     }
   }
 
@@ -67,11 +60,11 @@
     padding-left: 280px;
 
     &__footer {
-      padding: 40px 35px;
+      padding: 40px 0;
     }
 
     &__comments {
-      padding: 40px 35px;
+      padding: 40px 0; 
     }
   }
 }

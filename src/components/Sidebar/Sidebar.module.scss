@@ -35,13 +35,6 @@
   }
 }
 
-.switchers {
-  display: flex;
-  align-items: center;
-  order: 4;
-
-}
-
 @include breakpoint-md {
   .sidebar {
     width: 280px;
