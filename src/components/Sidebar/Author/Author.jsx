@@ -17,7 +17,6 @@ const Author = ({ author, isIndex, language }) => {
           </a>
         </h2>
       )}
-      <p className={styles['author__subtitle']}>{author.bio[language]}</p>
     </div>
   );
 };

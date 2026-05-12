@@ -16,6 +16,7 @@
     @include mixins.line-height(1.125);
     @include mixins.breakpoint-sm {
       @include mixins.margin(0.5, 0, 0.3, 0);
+      @include mixins.margin-bottom(0.8); 
     }
 
     &-link {
@@ -25,19 +26,6 @@
       &:focus {
         color: var(--color-base);
       }
-    }
-  }
-
-  &__subtitle {
-    display: none;
-    color: var(--color-gray);
-    @include mixins.line-height(0.8);
-    @include mixins.margin-bottom(1);
-    margin-top: 0;
-
-    @include mixins.breakpoint-sm {
-      display: block;
-      @include mixins.margin-bottom(1.4);
     }
   }
 }

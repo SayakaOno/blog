@@ -6,7 +6,7 @@ const Author = ({ author, language }) => (
   <div className={styles['author']}>
     <div className={styles['author__title']}>
       <strong>{author.name[language]}</strong>
-      {['github', 'linkedin', 'twitter'].map(name =>
+      {['github', 'linkedin', 'twitter'].map((name) =>
         !author.contacts[name] ? null : (
           <span className={styles['author__title__contacts-item']} key={name}>
             <a
@@ -18,13 +18,16 @@ const Author = ({ author, language }) => (
               <Icon icon={getIcon(name)} />
             </a>
           </span>
-        )
+        ),
       )}
     </div>
     <div className={styles['author__bio']}>
-      {author.bio[language]}
       <div className={styles['author__bio-portfolio']}>
-        <a href={author.contacts.portfolio.en} rel="noopener noreferrer" target="_blank">
+        <a
+          href={author.contacts.portfolio.en}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {author.contacts.portfolio.en}
         </a>
       </div>
