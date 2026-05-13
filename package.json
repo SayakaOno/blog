@@ -20,6 +20,7 @@
     "disqus-react": "^1.1.5",
     "normalize.css": "8.0.1",
     "prismjs": "^1.17.1",
+    "prop-types": "^15.8.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "rehype-autolink-headings": "^7.1.0",
