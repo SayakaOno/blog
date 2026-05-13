@@ -6,11 +6,11 @@
 
 // Colors
 $color-base: #222;
-// $color-primary: #5d93ff;
-$color-primary: #0091d5;
-// $color-secondary: #f7a046;
+$color-primary: #ea6a47;
 $color-secondary: #ea6a47;
-// $color-secondary: #d0422c;
+
+// $color-primary: #0091d5;
+// $color-secondary: #ea6a47;
 
 $color-white: #fff;
 $color-gray: color.adjust($color-base, $lightness: 40%, $space: hsl);
