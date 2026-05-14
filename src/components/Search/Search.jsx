@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import BlogList from './BlogList';
 import styles from './Search.module.scss';
 
@@ -15,9 +15,24 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
   const [number, setNumber] = useState([]);
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
+  const [yearOpen, setYearOpen] = useState(false);
+  const [monthOpen, setMonthOpen] = useState(false);
+  const yearRef = useRef(null);
+  const monthRef = useRef(null);
 
   useEffect(() => {
     setBlogsAndNumber(edges, totalCount);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (yearRef.current && !yearRef.current.contains(e.target))
+        setYearOpen(false);
+      if (monthRef.current && !monthRef.current.contains(e.target))
+        setMonthOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const setBlogsAndNumber = (blogs, number = blogs.length) => {
@@ -25,7 +40,7 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     setNumber(number);
   };
 
-  const onClickCategory = category => {
+  const onClickCategory = (category) => {
     if (category === selectedCategory) {
       clearFilter();
       filterBlogs(year, month, '', '');
@@ -39,9 +54,9 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     }
   };
 
-  const getTags = blogs => {
+  const getTags = (blogs) => {
     let tags = [];
-    blogs.forEach(blog => {
+    blogs.forEach((blog) => {
       if (blog.node.frontmatter.tags) {
         tags.push(...blog.node.frontmatter.tags);
       }
@@ -51,12 +66,12 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     return tags;
   };
 
-  const onClickTag = clickedTag => {
+  const onClickTag = (clickedTag) => {
     let tags = [];
     if (!selectedTags.length) {
       tags.push(clickedTag);
     } else if (selectedTags.includes(clickedTag)) {
-      tags = selectedTags.filter(tag => tag !== clickedTag);
+      tags = selectedTags.filter((tag) => tag !== clickedTag);
     } else {
       tags = [...selectedTags, clickedTag];
     }
@@ -65,14 +80,14 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
   };
 
   const filterBlogByCategory = (category, blogs = edges) => {
-    return blogs.filter(edge => edge.node.frontmatter.category === category);
+    return blogs.filter((edge) => edge.node.frontmatter.category === category);
   };
 
   const filterBlogByTags = (tags, blogs = blogsInSelectedCategory) => {
     return blogs.filter(
-      blog =>
+      (blog) =>
         blog.node.frontmatter.tags &&
-        includesAllTags(tags, blog.node.frontmatter.tags)
+        includesAllTags(tags, blog.node.frontmatter.tags),
     );
   };
 
@@ -84,9 +99,8 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
   };
 
   const clearYear = () => {
-    setMonth('00');
     setYear('00');
-    filterBlogs('', '', selectedCategory, selectedTags);
+    filterBlogs('', month, selectedCategory, selectedTags);
   };
 
   const clearMonth = () => {
@@ -115,7 +129,7 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
 
   const getBlogYears = () => {
     return Array.from(
-      new Set(edges.map(edge => edge.node.frontmatter.date.substr(0, 4)))
+      new Set(edges.map((edge) => edge.node.frontmatter.date.substr(0, 4))),
     );
   };
 
@@ -125,26 +139,30 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     filterBlogs(year, month, '', '');
   };
 
-  const onYearSelect = event => {
-    let year = event.target.value;
+  const onYearSelect = (value) => {
     let targetMonth = month;
-    if (year === '00') {
+    if (value === '00') {
       setMonth('00');
       targetMonth = '';
     }
-    setYear(year);
-    filterBlogs(event.target.value, targetMonth, selectedCategory, selectedTags);
+    setYear(value);
+    filterBlogs(value, targetMonth, selectedCategory, selectedTags);
   };
 
   const filterBlogs = (year, month, category, tags) => {
     let filteredBlogs = edges.slice();
-    if (month && month !== '00') {
-      filteredBlogs = filteredBlogs.filter(blog =>
-        blog.node.frontmatter.date.substr(0, 7) === `${year}-${month}`
+    if (year && year !== '00' && month && month !== '00') {
+      filteredBlogs = filteredBlogs.filter(
+        (blog) =>
+          blog.node.frontmatter.date.substr(0, 7) === `${year}-${month}`,
       );
     } else if (year && year !== '00') {
-      filteredBlogs = filteredBlogs.filter(blog =>
-        blog.node.frontmatter.date.substr(0, 4) === year
+      filteredBlogs = filteredBlogs.filter(
+        (blog) => blog.node.frontmatter.date.substr(0, 4) === year,
+      );
+    } else if (month && month !== '00') {
+      filteredBlogs = filteredBlogs.filter(
+        (blog) => blog.node.frontmatter.date.substr(5, 2) === month,
       );
     }
     if (tags && tags.length) {
@@ -156,49 +174,96 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     setBlogsAndNumber(filteredBlogs);
   };
 
-  const onMonthSelect = event => {
-    setMonth(event.target.value);
-    filterBlogs(year, event.target.value, selectedCategory, selectedTags);
+  const onMonthSelect = (value) => {
+    setMonth(value);
+    filterBlogs(year, value, selectedCategory, selectedTags);
   };
 
   const renderYearSelect = () => (
-    <div className={styles['search__filter__date-year']}>
-      <select value={year} onChange={onYearSelect}>
-        <option key="00" value="00">{language === 'en' ? 'Year' : '年'}</option>
-        {getBlogYears().map(y => (
-          <option key={y} value={y}>{y}</option>
-        ))}
-      </select>
+    <div className={styles['search__filter__date-year']} ref={yearRef}>
+      <div className={styles['dropdown']}>
+        <button
+          className={styles['dropdown__trigger']}
+          onClick={() => setYearOpen(!yearOpen)}
+        >
+          {year && year !== '00' ? year : language === 'en' ? 'Year' : '年'}
+          <span className={styles['dropdown__arrow']}>▾</span>
+        </button>
+        {yearOpen && (
+          <ul className={styles['dropdown__list']}>
+            {getBlogYears().map((y) => (
+              <li
+                key={y}
+                aria-selected={year === y || undefined}
+                onClick={() => {
+                  onYearSelect(y);
+                  setYearOpen(false);
+                }}
+              >
+                {y}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       {year && year !== '00' ? renderClearButton(clearYear) : null}
     </div>
   );
 
   const renderMonthSelect = () => {
-    if (language === 'en') {
-      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      return (
-        <div className={styles['search__filter__date-month']}>
-          <select value={month} onChange={onMonthSelect}>
-            <option key="00" value="00">Month</option>
-            {months.map((m, i) => {
-              const val = String(i + 1).padStart(2, '0');
-              return <option key={val} value={val}>{m}</option>;
-            })}
-          </select>
-          {month && month !== '00' ? renderClearButton(clearMonth) : null}
-        </div>
-      );
-    }
-    let options = [];
-    for (let i = 1; i <= 12; i++) {
-      const val = String(i).padStart(2, '0');
-      options.push(<option key={val} value={val}>{i + '月'}</option>);
-    }
+    const months =
+      language === 'en'
+        ? [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+          ]
+        : Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
+    const placeholder = language === 'en' ? 'Month' : '月';
+
     return (
-      <select value={month} onChange={onMonthSelect}>
-        <option key="00" value="00">月</option>
-        {options}
-      </select>
+      <div className={styles['search__filter__date-month']} ref={monthRef}>
+        <div className={styles['dropdown']}>
+          <button
+            className={styles['dropdown__trigger']}
+            onClick={() => setMonthOpen(!monthOpen)}
+          >
+            {month && month !== '00'
+              ? months[parseInt(month) - 1]
+              : placeholder}
+            <span className={styles['dropdown__arrow']}>▾</span>
+          </button>
+          {monthOpen && (
+            <ul className={styles['dropdown__list']}>
+              {months.map((m, i) => {
+                const val = String(i + 1).padStart(2, '0');
+                return (
+                  <li
+                    key={val}
+                    aria-selected={month === val || undefined}
+                    onClick={() => {
+                      onMonthSelect(val);
+                      setMonthOpen(false);
+                    }}
+                  >
+                    {m}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+        {month && month !== '00' ? renderClearButton(clearMonth) : null}
+      </div>
     );
   };
 
@@ -209,7 +274,7 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
         {selectedCategory ? renderClearButton(onClickClearCategory) : null}
       </div>
       <ul className={styles['search__filter__categories-list']}>
-        {categoriesList.map(category => (
+        {categoriesList.map((category) => (
           <li
             onClick={() => onClickCategory(category.fieldValue)}
             key={category.fieldValue}
@@ -233,7 +298,7 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
         {selectedTags.length ? renderClearButton(clearTagFilter) : null}
       </div>
       <ul className={styles['search__filter__tags-list']}>
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <li
             onClick={() => onClickTag(tag)}
             key={tag}
@@ -250,8 +315,13 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
     </div>
   );
 
-  const renderClearButton = clearFunction => (
-    <span onClick={clearFunction} className={styles['search__filter__clear-specific']}>×</span>
+  const renderClearButton = (clearFunction) => (
+    <span
+      onClick={clearFunction}
+      className={styles['search__filter__clear-specific']}
+    >
+      ×
+    </span>
   );
 
   const renderClearFilterButton = () => (
@@ -264,11 +334,17 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
 
   const renderCount = () => (
     <div className={styles['search__count']}>
-      {selectedCategory || (year && year !== '00')
+      {selectedCategory || (year && year !== '00') || (month && month !== '00')
         ? number === 0
-          ? language === 'en' ? 'No posts found' : '該当ブログがありません'
-          : language === 'en' ? `${number} post${number > 1 ? 's' : ''} found` : `該当ブログ: ${number}件`
-        : language === 'en' ? `${number} post${number > 1 ? 's' : ''}` : `全${number}件`}
+          ? language === 'en'
+            ? 'No posts found'
+            : '該当ブログがありません'
+          : language === 'en'
+            ? `${number} post${number > 1 ? 's' : ''} found`
+            : `該当ブログ: ${number}件`
+        : language === 'en'
+          ? `${number} post${number > 1 ? 's' : ''}`
+          : `全${number}件`}
     </div>
   );
 
@@ -280,11 +356,15 @@ const Search = ({ edges, totalCount, language, categoriesList }) => {
       <div className={styles['search__filter']}>
         <div className={styles['search__filter__date']}>
           {renderYearSelect()}
-          {year && year !== '00' ? renderMonthSelect() : null}
+          {renderMonthSelect()}
         </div>
         {renderCategories()}
         {tags.length ? renderTags() : null}
-        {(year && year !== '00') || selectedCategory ? renderClearFilterButton() : null}
+        {(year && year !== '00') ||
+        (month && month !== '00') ||
+        selectedCategory
+          ? renderClearFilterButton()
+          : null}
       </div>
       {renderCount()}
       <BlogList

@@ -5,12 +5,12 @@
   * {
     text-align: center;
   }
+
   &__select {
     @include margin-bottom(1);
-
-    select {
-      margin: 0 4px;
-    }
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 
     &__link {
       display: block;
@@ -19,6 +19,70 @@
       padding: 10px 20px;
       color: variables.$color-secondary;
       border: solid 1px variables.$color-secondary;
+    }
+  }
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.2rem 0.7rem;
+    min-width: 110px;
+    color: var(--color-base);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-gray-border);
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  &__arrow {
+    font-size: 1rem;
+    color: var(--color-gray);
+  }
+
+  &__list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-gray-border);
+    border-top: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    min-width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+
+    li {
+      display: block;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      margin: 0;
+
+      &:not([aria-selected]):hover {
+        background-color: rgba(234, 106, 71, 0.12);
+
+        :global([data-theme='dark']) & {
+          background-color: rgba(234, 106, 71, 0.3);
+        }
+      }
+
+      &[aria-selected] {
+        background-color: variables.$color-secondary;
+        color: var(--color-white);
+      }
     }
   }
 }
