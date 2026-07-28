@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import rehypeSlug from 'rehype-slug';
@@ -25,14 +26,16 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: 'prism',
-    remarkPlugins: [
-      remarkGfm,
-      remarkSmartypants,
-    ],
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'append' }],
-      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
-    ],
+    processor: unified({
+      remarkPlugins: [
+        remarkGfm,
+        remarkSmartypants,
+      ],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'append' }],
+        [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      ],
+    }),
   },
 });
