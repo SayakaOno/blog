@@ -67,8 +67,14 @@ const makePrevNext = (e) => e ? {
 const prev = makePrevNext(prevEntry);
 const next = makePrevNext(nextEntry);
 
-// Language switcher: use post's link field if present, otherwise no counterpart
-const otherLanguagePath = entry.data.link ? withSlash(entry.data.link) : null;
+// Language switcher: use the post's link field, but only if it resolves to a
+// published post. A link to a translation that doesn't exist yet (or a typo)
+// would otherwise 404 the switcher and emit hreflang pointing at nothing.
+const linkTarget = entry.data.link ? withSlash(entry.data.link) : null;
+const publishedPosts = await getCollection('posts', ({ data }) => !data.draft);
+const otherLanguagePath = linkTarget && publishedPosts.some(p => withSlash(entrySlug(p)) === linkTarget)
+  ? linkTarget
+  : null;
 
 const pathname = Astro.url.pathname;
 ---
