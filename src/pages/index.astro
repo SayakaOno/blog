@@ -22,7 +22,7 @@ const description = siteMetadata.subtitle;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={description} language={language}>
+<BaseLayout title={title} description={description} language={language} otherLanguagePath="/ja/">
   <Sidebar
     client:load
     transition:persist="sidebar"

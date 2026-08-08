@@ -35,7 +35,7 @@ const otherLanguagePath = enCatExists ? `/category/${kebabCase(catName)}/` : nul
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language} otherLanguagePath={otherLanguagePath}>
   <Sidebar
     client:load
     transition:persist="sidebar"

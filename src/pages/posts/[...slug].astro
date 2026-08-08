@@ -73,7 +73,7 @@ const otherLanguagePath = entry.data.link ? withSlash(entry.data.link) : null;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={description} language={language}>
+<BaseLayout title={title} description={description} language={language} otherLanguagePath={otherLanguagePath}>
   <Sidebar
     client:load
     transition:persist="sidebar"

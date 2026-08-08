@@ -12,7 +12,7 @@ const title = `タグ - ${siteMetadata.titleJa}`;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language} otherLanguagePath="/tags/">
   <Sidebar
     client:load
     transition:persist="sidebar"

@@ -13,7 +13,7 @@ const title = `Search - ${siteMetadata.title}`;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language} otherLanguagePath="/search/ja/">
   <Sidebar
     client:load
     transition:persist="sidebar"

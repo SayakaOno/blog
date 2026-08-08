@@ -34,7 +34,7 @@ const otherLanguagePath = otherExists ? withSlash(`/pages/${otherSlug}`) : null;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={description} language={language}>
+<BaseLayout title={title} description={description} language={language} otherLanguagePath={otherLanguagePath}>
   <Sidebar
     client:load
     transition:persist="sidebar"

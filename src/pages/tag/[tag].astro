@@ -38,7 +38,7 @@ const otherLanguagePath = jaTagExists ? `/tag/${kebabCase(tagName)}/ja/` : null;
 const pathname = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={siteMetadata.subtitle} language={language}>
+<BaseLayout title={title} description={siteMetadata.subtitle} language={language} otherLanguagePath={otherLanguagePath}>
   <Sidebar
     client:load
     transition:persist="sidebar"

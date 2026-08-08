@@ -21,7 +21,7 @@ const pathname = Astro.url.pathname;
 const otherLanguagePath = '/lifelog/';
 ---
 
-<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language}>
+<BaseLayout title={title} description={siteMetadata.subtitleJa} language={language} otherLanguagePath={otherLanguagePath}>
   <Sidebar
     client:load
     transition:persist="sidebar"

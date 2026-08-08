@@ -30,6 +30,8 @@ const pageTitle = `Page ${currentPage + 1} - ${siteMetadata.titleJa}`;
 const pathname = Astro.url.pathname;
 ---
 
+<!-- No hreflang: the switcher falls back to the other language's home, which is
+     not a true translation of this paginated page, so annotating it would lie. -->
 <BaseLayout title={pageTitle} description={siteMetadata.subtitleJa} language={language}>
   <Sidebar
     client:load

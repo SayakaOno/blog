@@ -8,12 +8,14 @@ export interface Props {
   title?: string;
   description?: string;
   language?: 'en' | 'ja';
+  otherLanguagePath?: string | null;
 }
 
 const {
   title = siteMetadata.title,
   description = siteMetadata.subtitle,
   language = 'en',
+  otherLanguagePath = null,
 } = Astro.props;
 
 const lang = language === 'ja' ? 'ja' : 'en';
@@ -24,6 +26,18 @@ const canonical = new URL(Astro.url.pathname, siteMetadata.url);
 if (!canonical.pathname.endsWith('/')) {
   canonical.pathname += '/';
 }
+
+// hreflang: tell Google the en/ja pages are translations of each other rather
+// than duplicates. Only emitted where a counterpart page actually exists.
+const otherUrl = otherLanguagePath
+  ? new URL(otherLanguagePath, siteMetadata.url).href
+  : null;
+const alternates = otherUrl
+  ? {
+      en: language === 'en' ? canonical.href : otherUrl,
+      ja: language === 'ja' ? canonical.href : otherUrl,
+    }
+  : null;
 ---
 
 <!DOCTYPE html>
@@ -37,6 +51,13 @@ if (!canonical.pathname.endsWith('/')) {
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <link rel="canonical" href={canonical.href} />
+    {alternates && (
+      <>
+        <link rel="alternate" hreflang="en" href={alternates.en} />
+        <link rel="alternate" hreflang="ja" href={alternates.ja} />
+        <link rel="alternate" hreflang="x-default" href={alternates.en} />
+      </>
+    )}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/prismjs/theme.min.css" />
     <link rel="sitemap" href="/sitemap-index.xml" />
