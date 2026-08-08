@@ -1,7 +1,7 @@
 import styles from './Author.module.scss';
 
 const Author = ({ author, isIndex, language }) => {
-  const home = language === 'en' ? '/' : '/ja';
+  const home = language === 'en' ? '/' : '/ja/';
   return (
     <div className={styles['author']}>
       {isIndex ? (

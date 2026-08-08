@@ -113,9 +113,9 @@ const PaginationBox = ({ currentPage, totalPage, language, dates }) => {
 
   const getLink = index => {
     if (index === 0) {
-      return language === 'en' ? '/' : '/ja';
+      return language === 'en' ? '/' : '/ja/';
     }
-    return `/page/${index}${language === 'en' ? '' : '/ja'}`;
+    return `/page/${index}${language === 'en' ? '' : '/ja'}/`;
   };
 
   const displayDate = (i, event) => {

@@ -1,3 +1,4 @@
+import { withSlash } from '../../../utils';
 import styles from './RelatedPosts.module.scss';
 
 /**
@@ -14,7 +15,7 @@ const RelatedPosts = ({ language, posts }) => (
     <ul>
       {posts.map(post => (
         <li key={post.slug}>
-          <a href={post.slug}>{post.title || post.slug}</a>
+          <a href={withSlash(post.slug)}>{post.title || post.slug}</a>
         </li>
       ))}
     </ul>

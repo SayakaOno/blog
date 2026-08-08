@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar';
 import Page from '../../components/Page';
 import siteMetadata from '../../data/siteMetadata.js';
+import withSlash from '../../utils/with-slash';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -23,11 +24,12 @@ const siteSubtitle = language === 'en' ? siteMetadata.subtitle : siteMetadata.su
 const title = `${entry.data.title} - ${siteTitle}`;
 const description = entry.data.description ?? siteSubtitle;
 
-// Other language version: just flip /ja suffix
-const basePath = `/pages/${slug}`;
-const otherLanguagePath = language === 'en'
-  ? `/pages/${slug}/ja`
-  : `/pages/${slug.replace(/\/ja$/, '')}`;
+// Other language version: flip the /ja suffix, but only if that page exists.
+// null disables the language switcher (e.g. contacts has no Japanese version).
+const otherSlug = language === 'en' ? `${slug}/ja` : slug.replace(/\/ja$/, '');
+const allPages = await getCollection('pages');
+const otherExists = allPages.some(p => p.id.replace(/\.md$/, '') === otherSlug);
+const otherLanguagePath = otherExists ? withSlash(`/pages/${otherSlug}`) : null;
 
 const pathname = Astro.url.pathname;
 ---

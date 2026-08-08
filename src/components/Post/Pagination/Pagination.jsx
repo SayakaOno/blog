@@ -1,4 +1,5 @@
 import { formatDate, formatDateMachine } from '../../../utils/format-date';
+import { withSlash } from '../../../utils';
 import styles from './Pagination.module.scss';
 
 const Pagination = ({ language, prev, next }) => {
@@ -6,7 +7,7 @@ const Pagination = ({ language, prev, next }) => {
     if (!prev || !prev.slug) return null;
     return (
       <div className={styles['pagination__prev']}>
-        <a className={styles['pagination__prev__link']} href={prev.slug}>
+        <a className={styles['pagination__prev__link']} href={withSlash(prev.slug)}>
           <div className={styles['pagination__prev__link-date']}>
             {language === 'en' ? formatDate(prev.date, 'en') : formatDateMachine(prev.date)}
           </div>
@@ -22,7 +23,7 @@ const Pagination = ({ language, prev, next }) => {
     if (!next || !next.slug) return null;
     return (
       <div className={styles['pagination__next']}>
-        <a className={styles['pagination__next__link']} href={next.slug}>
+        <a className={styles['pagination__next__link']} href={withSlash(next.slug)}>
           <div className={styles['pagination__next__link-date']}>
             {language === 'en' ? formatDate(next.date, 'en') : formatDateMachine(next.date)}
           </div>

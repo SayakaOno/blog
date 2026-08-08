@@ -54,8 +54,8 @@ const Search = ({ currentPage, language, dates }) => {
 
   const getLink = () => {
     let page = searchPage();
-    if (!page) return language === 'en' ? '/' : '/ja';
-    return `/page/${page}${language === 'en' ? '' : '/ja'}`;
+    if (!page) return language === 'en' ? '/' : '/ja/';
+    return `/page/${page}${language === 'en' ? '' : '/ja'}/`;
   };
 
   const getYearOptions = () => {

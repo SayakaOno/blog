@@ -1,5 +1,5 @@
 import { formatDateShort, formatDateMachine } from '../../../utils/format-date';
-import { getIcon } from '../../../utils';
+import { getIcon, withSlash } from '../../../utils';
 import Icon from '../../Icon';
 import styles from './BlogList.module.scss';
 
@@ -15,7 +15,7 @@ const BlogList = ({ edges, filters, language }) => {
         <a
           className={styles['blog-list__item-title-link']}
           key={edge.node.fields.slug}
-          href={edge.node.fields.slug}
+          href={withSlash(edge.node.fields.slug)}
         >
           <div className={styles['blog-list__item']}>
             <div className={styles['blog-list__item-meta']}>

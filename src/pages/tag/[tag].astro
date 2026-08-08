@@ -34,7 +34,7 @@ const title = `All Posts tagged as "${tagName}" - ${siteMetadata.title}`;
 // Check if this tag exists in JA
 const jaTags = await getTagsList('ja');
 const jaTagExists = jaTags.some(t => t.fieldValue === tagName);
-const otherLanguagePath = jaTagExists ? `/tag/${kebabCase(tagName)}/ja` : null;
+const otherLanguagePath = jaTagExists ? `/tag/${kebabCase(tagName)}/ja/` : null;
 const pathname = Astro.url.pathname;
 ---
 

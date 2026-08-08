@@ -18,6 +18,12 @@ const {
 
 const lang = language === 'ja' ? 'ja' : 'en';
 const gaId = siteMetadata.googleAnalyticsId;
+
+// Pages build to directory URLs, so the canonical form always ends in a slash.
+const canonical = new URL(Astro.url.pathname, siteMetadata.url);
+if (!canonical.pathname.endsWith('/')) {
+  canonical.pathname += '/';
+}
 ---
 
 <!DOCTYPE html>
@@ -30,6 +36,7 @@ const gaId = siteMetadata.googleAnalyticsId;
     <meta property="og:site_name" content={title} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
+    <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/prismjs/theme.min.css" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -63,7 +70,7 @@ const gaId = siteMetadata.googleAnalyticsId;
         sessionStorage.setItem('visited', 'true');
         const browserLang = navigator.language || (navigator as any).userLanguage;
         if (browserLang === 'ja' && !location.pathname.startsWith('/ja')) {
-          location.href = '/ja';
+          location.href = '/ja/';
         }
       }
     </script>

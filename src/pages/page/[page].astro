@@ -37,7 +37,7 @@ const pathname = Astro.url.pathname;
     transition:persist="sidebar"
     siteMetadata={siteMetadata}
     pathname={pathname}
-    otherLanguagePath="/ja"
+    otherLanguagePath="/ja/"
   />
   <Page client:load>
     <Feed edges={edges} language={language} />
@@ -45,8 +45,8 @@ const pathname = Astro.url.pathname;
       client:load
       currentPage={currentPage}
       totalPage={totalPage}
-      prevPagePath={currentPage <= 1 ? '/' : `/page/${currentPage - 1}`}
-      nextPagePath={`/page/${currentPage + 1}`}
+      prevPagePath={currentPage <= 1 ? '/' : `/page/${currentPage - 1}/`}
+      nextPagePath={`/page/${currentPage + 1}/`}
       hasPrevPage={currentPage > 0}
       hasNextPage={currentPage < totalPage - 1}
       language={language}

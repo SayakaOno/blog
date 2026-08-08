@@ -13,7 +13,7 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.sayaka-ono.com',
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   integrations: [react(), sitemap(), mdx()],
   vite: {
     build: {

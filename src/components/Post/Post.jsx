@@ -5,12 +5,13 @@ import Meta from './Meta';
 import Tags from './Tags';
 import Pagination from './Pagination';
 import RelatedPosts from './RelatedPosts';
+import { withSlash } from '../../utils';
 import styles from './Post.module.scss';
 
 const Post = ({ post, language, prev, next, author, siteUrl, disqusShortname, children }) => {
   const { categorySlug, tagSlugs, slug } = post.fields;
   const { category, tags, title, date, updatedDate } = post.frontmatter;
-  const home = language === 'en' ? '/' : '/ja';
+  const home = language === 'en' ? '/' : '/ja/';
 
   return (
     <div className={styles['post']}>
@@ -30,7 +31,7 @@ const Post = ({ post, language, prev, next, author, siteUrl, disqusShortname, ch
           <Meta date={date} updatedDate={updatedDate} language={language} />
           <div className={styles['post__footer-category']}>
             {language === 'en' ? 'Category: ' : 'カテゴリー： '}
-            <a href={`${categorySlug}${language === 'en' ? '' : '/ja'}`}>
+            <a href={withSlash(`${categorySlug}${language === 'en' ? '' : '/ja'}`)}>
               {category}
             </a>
           </div>

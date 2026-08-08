@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar';
 import Post from '../../components/Post';
 import siteMetadata from '../../data/siteMetadata.js';
 import { getIndexPosts, getPublishedPosts, makeGatsbyPost, entrySlug, LIFELOG_CATEGORIES } from '../../utils/content';
+import withSlash from '../../utils/with-slash';
 
 export async function getStaticPaths() {
   // Index posts (home !== false) get prev/next navigation
@@ -67,7 +68,7 @@ const prev = makePrevNext(prevEntry);
 const next = makePrevNext(nextEntry);
 
 // Language switcher: use post's link field if present, otherwise no counterpart
-const otherLanguagePath = entry.data.link ?? null;
+const otherLanguagePath = entry.data.link ? withSlash(entry.data.link) : null;
 
 const pathname = Astro.url.pathname;
 ---

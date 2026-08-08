@@ -18,13 +18,13 @@ const pathname = Astro.url.pathname;
     transition:persist="sidebar"
     siteMetadata={siteMetadata}
     pathname={pathname}
-    otherLanguagePath="/tags"
+    otherLanguagePath="/tags/"
   />
   <Page client:load title="タグ">
     <ul>
       {tags.map(tag => (
         <li>
-          <a href={`/tag/${kebabCase(tag.fieldValue)}/ja`}>
+          <a href={`/tag/${kebabCase(tag.fieldValue)}/ja/`}>
             {tag.fieldValue} ({tag.totalCount})
           </a>
         </li>

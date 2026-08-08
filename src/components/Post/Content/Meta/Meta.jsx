@@ -1,5 +1,5 @@
 import { formatDateShort } from '../../../../utils/format-date';
-import { getIcon } from '../../../../utils';
+import { getIcon, withSlash } from '../../../../utils';
 import Icon from '../../../Icon';
 import styles from './Meta.module.scss';
 
@@ -26,7 +26,7 @@ const Meta = ({ language, fields, frontmatter }) => {
             {' '}<Icon icon={getIcon('category')} />
           </span>
           <a
-            href={`${categorySlug}${language === 'en' ? '' : '/ja'}`}
+            href={withSlash(`${categorySlug}${language === 'en' ? '' : '/ja'}`)}
             className={styles['meta__category-link']}
           >
             {category}
@@ -41,7 +41,7 @@ const Meta = ({ language, fields, frontmatter }) => {
               tagSlugs.map((slug, i) => (
                 <span className={styles['meta__tags-item']} key={tags[i]}>
                   <a
-                    href={`${slug}${language === 'ja' ? '/ja' : ''}`}
+                    href={withSlash(`${slug}${language === 'ja' ? '/ja' : ''}`)}
                     className={styles['meta__tags-item-link']}
                   >
                     {tags[i]}

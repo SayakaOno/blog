@@ -44,8 +44,8 @@ const pathname = Astro.url.pathname;
       client:load
       currentPage={currentPage}
       totalPage={totalPage}
-      prevPagePath={currentPage <= 1 ? '/ja' : `/page/${currentPage - 1}/ja`}
-      nextPagePath={`/page/${currentPage + 1}/ja`}
+      prevPagePath={currentPage <= 1 ? '/ja/' : `/page/${currentPage - 1}/ja/`}
+      nextPagePath={`/page/${currentPage + 1}/ja/`}
       hasPrevPage={currentPage > 0}
       hasNextPage={currentPage < totalPage - 1}
       language={language}
