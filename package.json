@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
-    "lost": "8.3.1",
-    "postcss-pxtorem": "4.0.1",
+    "lost": "9.0.2",
+    "postcss-pxtorem": "6.1.0",
     "rimraf": "^5.0.0",
     "sass": "^1.70.0"
   }
